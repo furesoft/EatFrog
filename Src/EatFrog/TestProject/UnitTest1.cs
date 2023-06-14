@@ -1,15 +1,23 @@
+using EatFrog.Assembler.Core;
+using Furesoft.PrattParser;
+using Furesoft.PrattParser.Nodes;
+using AParser = EatFrog.Assembler.Core.AssemblyParser<TestProject.TestOpcodes>;
+
 namespace TestProject;
 
-public class Tests
+public class ParsingTests
 {
     [SetUp]
     public void Setup()
     {
+        
     }
 
     [Test]
-    public void Test1()
+    public void Opcode_Should_Pass()
     {
-        Assert.Pass();
+        var tree = Parser.Parse<AstNode, AParser>("mov 42", "test.dsl");
+        
+        Assert.IsFalse(tree.Document.Messages.Any());
     }
 }
