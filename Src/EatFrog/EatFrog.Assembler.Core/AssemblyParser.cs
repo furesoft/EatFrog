@@ -11,6 +11,7 @@ public class AssemblyParser<T> : Parser<AstNode>
     {
         Register(PredefinedSymbols.Name, new OpCodeParselet<T>());
         this.AddCommonLiterals();
+        this.AddArithmeticOperators();
     }
     
     protected override void InitLexer(Lexer lexer)
