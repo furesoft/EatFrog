@@ -16,7 +16,7 @@ public class ParsingTests
     [Test]
     public void Opcode_Should_Pass()
     {
-        var tree = Parser.Parse<AstNode, AParser>("mov 42", "test.dsl");
+        var tree = Parser.Parse<AstNode, AParser>("call 42", "test.dsl");
         
         Assert.IsFalse(tree.Document.Messages.Any());
     }

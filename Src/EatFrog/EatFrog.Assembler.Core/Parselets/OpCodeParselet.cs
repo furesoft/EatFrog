@@ -10,6 +10,6 @@ public class OpCodeParselet<T> : IPrefixParselet<AstNode>
 {
     public AstNode Parse(Parser<AstNode> parser, Token token)
     {
-        return new OpCodeNode<T>(Enum.Parse<T>(token.ToString(), true));
+        return new OpCodeNode<T>(Enum.Parse<T>(token.ToString(), true)).WithRange(token);
     }
 }

@@ -1,4 +1,5 @@
-﻿using EatFrog.Assembler.Core.Parselets;
+﻿using EatFrog.Assembler.Core.Matcher;
+using EatFrog.Assembler.Core.Parselets;
 using Furesoft.PrattParser;
 using Furesoft.PrattParser.Nodes;
 
@@ -9,7 +10,7 @@ public class AssemblyParser<T> : Parser<AstNode>
 {
     public AssemblyParser()
     {
-        Register(PredefinedSymbols.Name, new OpCodeParselet<T>());
+        Register("#opcode", new OpCodeParselet<T>());
         this.AddCommonLiterals();
         this.AddArithmeticOperators();
     }
@@ -17,5 +18,6 @@ public class AssemblyParser<T> : Parser<AstNode>
     protected override void InitLexer(Lexer lexer)
     {
         lexer.MatchNumber(true, true);
+        lexer.AddMatcher(new OpcodeMatcher<T>());
     }
 }
