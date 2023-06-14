@@ -1,4 +1,4 @@
-﻿namespace EatFrog;
+﻿namespace EatFrog.Operands;
 
 public abstract class Operand
 {

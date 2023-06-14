@@ -1,4 +1,6 @@
-﻿namespace EatFrog;
+﻿using EatFrog.Operands;
+
+namespace EatFrog;
 
 public class Instruction<T>
 {
