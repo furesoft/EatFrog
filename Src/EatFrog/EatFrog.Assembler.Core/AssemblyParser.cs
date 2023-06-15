@@ -10,7 +10,7 @@ public class AssemblyParser<T> : Parser<AstNode>
 {
     public AssemblyParser()
     {
-        Register("#opcode", new OpCodeParselet<T>());
+        Register("#opcode", new InstructionParselet<T>());
         this.AddCommonLiterals();
         this.AddArithmeticOperators();
     }
@@ -19,5 +19,6 @@ public class AssemblyParser<T> : Parser<AstNode>
     {
         lexer.MatchNumber(true, true);
         lexer.AddMatcher(new OpcodeMatcher<T>());
+        lexer.Ignore(' ');
     }
 }
