@@ -16,6 +16,9 @@ public class AssemblyParser<T> : Parser<AstNode>
         this.AddArithmeticOperators();
         
         Group("[", "]");
+        Block(PredefinedSymbols.EOL, PredefinedSymbols.EOF);
+        
+        //Register(PredefinedSymbols.Name, new LabelParselet());
     }
     
     protected override void InitLexer(Lexer lexer)
