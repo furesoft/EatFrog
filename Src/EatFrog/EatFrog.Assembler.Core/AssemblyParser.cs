@@ -11,8 +11,11 @@ public class AssemblyParser<T> : Parser<AstNode>
     public AssemblyParser()
     {
         Register("#opcode", new InstructionParselet<T>());
+        
         this.AddCommonLiterals();
         this.AddArithmeticOperators();
+        
+        Group("[", "]");
     }
     
     protected override void InitLexer(Lexer lexer)
