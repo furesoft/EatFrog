@@ -4,6 +4,11 @@
         <TargetFramework>net7.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>disable</Nullable>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Authors>furesoft</Authors>
+        <Description>A framework to build emitters for compilers</Description>
+        <RepositoryUrl>https://github.com/furesoft/EatFrog</RepositoryUrl>
+        <PackageTags>compiler</PackageTags>
     </PropertyGroup>
 
     <ItemGroup>

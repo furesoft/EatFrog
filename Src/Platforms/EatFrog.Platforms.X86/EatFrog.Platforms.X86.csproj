@@ -3,6 +3,15 @@
     <PropertyGroup>
         <TargetFramework>net7.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Authors>furesoft</Authors>
+        <Description>A framework to build emitters for compilers</Description>
+        <RepositoryUrl>https://github.com/furesoft/EatFrog</RepositoryUrl>
+        <PackageTags>compiler</PackageTags>
     </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\EatFrog\EatFrog.csproj" />
+    </ItemGroup>
 
 </Project>
