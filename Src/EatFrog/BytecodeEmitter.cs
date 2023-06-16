@@ -1,5 +1,7 @@
 ﻿using EatFrog.Operands;
 using EatFrog.Validation;
+using Syroot.BinaryData;
+using Syroot.BinaryData.Core;
 
 namespace EatFrog;
 
@@ -12,14 +14,15 @@ public abstract class BytecodeEmitter<TEncoder, TValidator, TOpcode, TRegister> 
     private readonly TEncoder _encoder = new();
     private readonly TValidator _validator = new();
     private readonly Dictionary<string, ulong> _labels = new();
-    private BinaryWriter _writer;
+    private BinaryStream _writer;
     private bool _isClosed = false;
 
     public abstract ulong StackStartAddress { get; }
 
-    public BytecodeEmitter(Stream target)
+    public BytecodeEmitter(Stream target, Endian endian)
     {
         _writer = new(target);
+        _writer.ByteConverter = endian == Endian.Little ? ByteConverter.Little : ByteConverter.Big;
     }
 
     /// <summary>
