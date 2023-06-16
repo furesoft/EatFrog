@@ -5,4 +5,5 @@ public enum TestOpcodes
     Mov,
     Add,
     Call,
+    Ret
 }

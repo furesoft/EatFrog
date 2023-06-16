@@ -1,19 +1,24 @@
-﻿namespace EatFrog;
+﻿using EatFrog.Validation;
 
-public abstract class BytecodeEmitter<TEncoder, TOpcode>
+namespace EatFrog;
+
+public abstract class BytecodeEmitter<TEncoder, TOpcode, TValidator>
     where TEncoder : InstructionEncoder<TOpcode>, new()
     where TOpcode : struct
+    where TValidator : InstructionValidator<TOpcode>, new()
 {
+    private readonly TEncoder _encoder = new();
+    private readonly TValidator _validator = new();
+    
     public abstract ulong StackStartAddress { get; }
 
     public bool Emit(Stream target, IEnumerable<Instruction<TOpcode>> instructions)
     {
-        var encoder = new TEncoder();
         using var binaryWriter = new BinaryWriter(target);
 
         foreach (var instruction in instructions)
         {
-            if (!encoder.Encode(instruction, binaryWriter))
+            if (!_encoder.Encode(instruction, binaryWriter))
             {
                 return false;
             }
