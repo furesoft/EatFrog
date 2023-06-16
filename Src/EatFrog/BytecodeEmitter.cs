@@ -2,9 +2,10 @@
 
 namespace EatFrog;
 
-public abstract class BytecodeEmitter<TEncoder, TOpcode, TValidator>
+public abstract class BytecodeEmitter<TEncoder, TValidator, TOpcode, TRegister>
     where TEncoder : InstructionEncoder<TOpcode>, new()
     where TOpcode : struct
+    where TRegister : struct
     where TValidator : InstructionValidator<TOpcode>, new()
 {
     private readonly TEncoder _encoder = new();

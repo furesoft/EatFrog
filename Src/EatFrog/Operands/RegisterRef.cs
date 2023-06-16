@@ -1,10 +1,10 @@
 ﻿namespace EatFrog.Operands;
 
-public class RegisterRef : Operand
+public class RegisterRef<TRegister> : Operand
 {
-    private string Name { get; }
+    private TRegister Name { get; }
 
-    public RegisterRef(string name)
+    public RegisterRef(TRegister name)
     {
         Name = name;
     }
