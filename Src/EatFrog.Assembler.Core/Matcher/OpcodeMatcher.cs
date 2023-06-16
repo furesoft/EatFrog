@@ -3,7 +3,7 @@ using Furesoft.PrattParser.Lexing;
 
 namespace EatFrog.Assembler.Core.Matcher;
 
-public class OpcodeMatcher<T> : ILexerMatcher
+internal class OpcodeMatcher<T> : ILexerMatcher
     where T : struct
 {
     public bool Match(Lexer lexer, char c)

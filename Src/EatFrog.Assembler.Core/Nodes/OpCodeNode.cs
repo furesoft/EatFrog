@@ -2,7 +2,7 @@
 
 namespace EatFrog.Assembler.Core.Nodes;
 
-public class InstructionNode<T> : AstNode
+internal class InstructionNode<T> : AstNode
     where T : struct
 {
     public T Opcode { get; }

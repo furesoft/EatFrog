@@ -5,7 +5,7 @@ using Furesoft.PrattParser.Parselets;
 
 namespace EatFrog.Assembler.Core.Parselets;
 
-public class InstructionParselet<T> : IPrefixParselet<AstNode>
+internal class InstructionParselet<T> : IPrefixParselet<AstNode>
     where T : struct
 {
     public AstNode Parse(Parser<AstNode> parser, Token token)

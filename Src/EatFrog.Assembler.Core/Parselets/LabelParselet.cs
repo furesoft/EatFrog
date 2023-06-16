@@ -5,7 +5,7 @@ using Furesoft.PrattParser.Parselets;
 
 namespace EatFrog.Assembler.Core.Parselets;
 
-public class LabelParselet : IPrefixParselet<AstNode>
+internal class LabelParselet : IPrefixParselet<AstNode>
 {
     public int GetBindingPower()
     {

@@ -5,12 +5,12 @@ using Furesoft.PrattParser.Nodes;
 
 namespace EatFrog.Assembler.Core;
 
-public class AssemblyParser<T> : Parser<AstNode>
-    where T : struct
+public class AssemblyParser<TOpcode> : Parser<AstNode>
+    where TOpcode : struct
 {
     public AssemblyParser()
     {
-        Register("#opcode", new InstructionParselet<T>());
+        Register("#opcode", new InstructionParselet<TOpcode>());
         
         this.AddCommonLiterals();
         this.AddArithmeticOperators();
@@ -24,7 +24,7 @@ public class AssemblyParser<T> : Parser<AstNode>
     protected override void InitLexer(Lexer lexer)
     {
         lexer.MatchNumber(true, true);
-        lexer.AddMatcher(new OpcodeMatcher<T>());
+        lexer.AddMatcher(new OpcodeMatcher<TOpcode>());
         lexer.Ignore(' ');
     }
 }

@@ -6,7 +6,7 @@ public class Instruction<TOpcode>
     where TOpcode : struct
 {
     public TOpcode Opcode { get; }
-    public List<Operand> Operands { get; set; } = new();
+    public Operand[] Operands { get; set; }
 
     public Instruction(TOpcode opcode)
     {
@@ -15,6 +15,6 @@ public class Instruction<TOpcode>
 
     public override string ToString()
     {
-        return Opcode + " " + string.Join(',', Operands);
+        return Opcode + " " + string.Join(',', Operands.Select(_=> _.ToString()));
     }
 }
