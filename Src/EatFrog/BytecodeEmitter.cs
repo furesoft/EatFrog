@@ -22,6 +22,10 @@ public abstract class BytecodeEmitter<TEncoder, TValidator, TOpcode, TRegister> 
         _writer = new(target);
     }
 
+    /// <summary>
+    /// Ensures that the labels can be fixed in second run later
+    /// </summary>
+    /// <exception cref="EmiterNotClosedException"></exception>
     ~BytecodeEmitter()
     {
         if (!_isClosed)
@@ -51,6 +55,16 @@ public abstract class BytecodeEmitter<TEncoder, TValidator, TOpcode, TRegister> 
         }
 
         return true;
+    }
+
+    public bool Emit(TOpcode opcode)
+    {
+        return Emit(new Instruction<TOpcode>(opcode));
+    }
+    
+    public bool Emit(TOpcode opcode, params Operand[] operands)
+    {
+        return Emit(new Instruction<TOpcode>(opcode){ Operands = operands});
     }
 
     public void Dispose()
