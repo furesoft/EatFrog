@@ -2,7 +2,7 @@
 
 public class IndirectAddress : Operand
 {
-    private ulong Address { get; }
+    public ulong Address { get; }
 
     public IndirectAddress(ulong address)
     {

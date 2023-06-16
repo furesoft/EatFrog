@@ -2,7 +2,7 @@
 
 public class Address : Operand
 {
-    private ulong Value { get; }
+    public ulong Value { get; }
 
     public Address(ulong value)
     {

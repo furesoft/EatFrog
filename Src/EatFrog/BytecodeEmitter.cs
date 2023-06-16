@@ -1,8 +1,9 @@
-﻿using EatFrog.Validation;
+﻿using EatFrog.Operands;
+using EatFrog.Validation;
 
 namespace EatFrog;
 
-public abstract class BytecodeEmitter<TEncoder, TValidator, TOpcode, TRegister>
+public abstract class BytecodeEmitter<TEncoder, TValidator, TOpcode, TRegister> : IDisposable
     where TEncoder : InstructionEncoder<TOpcode>, new()
     where TOpcode : struct
     where TRegister : struct
@@ -10,21 +11,51 @@ public abstract class BytecodeEmitter<TEncoder, TValidator, TOpcode, TRegister>
 {
     private readonly TEncoder _encoder = new();
     private readonly TValidator _validator = new();
-    
+    private readonly Dictionary<string, ulong> _labels = new();
+    private BinaryWriter _writer;
+    private bool _isClosed = false;
+
     public abstract ulong StackStartAddress { get; }
 
-    public bool Emit(Stream target, IEnumerable<Instruction<TOpcode>> instructions)
+    public BytecodeEmitter(Stream target)
     {
-        using var binaryWriter = new BinaryWriter(target);
+        _writer = new(target);
+    }
 
-        foreach (var instruction in instructions)
+    ~BytecodeEmitter()
+    {
+        if (!_isClosed)
         {
-            if (!_encoder.Encode(instruction, binaryWriter))
-            {
-                return false;
-            }
+            throw new EmiterNotClosedException();
+        }
+    }
+
+    public LabelRef CreateLabel(string name)
+    {
+        var lbl = new LabelRef(name);
+        _labels.Add(lbl.Name, (ulong) _writer.BaseStream.Position);
+
+        return lbl;
+    }
+
+    public bool Emit(Instruction<TOpcode> instruction)
+    {
+        if (!_validator.Validate(instruction))
+        {
+            return false;
         }
         
+        if (!_encoder.Encode(instruction, _writer))
+        {
+            return false;
+        }
+
         return true;
+    }
+
+    public void Dispose()
+    {
+        _writer?.Dispose();
+        _isClosed = true;
     }
 }

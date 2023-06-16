@@ -2,7 +2,7 @@
 
 public class RegisterRef<TRegister> : Operand
 {
-    private TRegister Name { get; }
+    public TRegister Name { get; }
 
     public RegisterRef(TRegister name)
     {

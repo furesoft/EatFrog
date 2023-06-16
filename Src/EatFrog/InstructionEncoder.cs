@@ -1,6 +1,7 @@
 ﻿namespace EatFrog;
 
-public abstract class InstructionEncoder<T>
+public abstract class InstructionEncoder<TOpcode>
+    where TOpcode : struct
 {
-    public abstract bool Encode(Instruction<T> instruction, BinaryWriter writer);
+    public abstract bool Encode(Instruction<TOpcode> instruction, BinaryWriter writer);
 }

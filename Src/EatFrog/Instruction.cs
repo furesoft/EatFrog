@@ -2,18 +2,19 @@
 
 namespace EatFrog;
 
-public class Instruction<T>
+public class Instruction<TOpcode>
+    where TOpcode : struct
 {
-    public T Opcode { get; set; }
+    public TOpcode Opcode { get; }
     public List<Operand> Operands { get; set; } = new();
 
-    public Instruction(T opcode)
+    public Instruction(TOpcode opcode)
     {
         Opcode = opcode;
     }
 
     public override string ToString()
     {
-        return Opcode + string.Join(',', Operands);
+        return Opcode + " " + string.Join(',', Operands);
     }
 }

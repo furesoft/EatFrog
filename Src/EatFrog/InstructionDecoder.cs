@@ -1,6 +1,7 @@
 ﻿namespace EatFrog;
 
-public abstract class InstructionDecoder<T>
+public abstract class InstructionDecoder<TOpcode>
+    where TOpcode : struct
 {
-    public abstract Instruction<T> Decode(BinaryReader reader);
+    public abstract Instruction<TOpcode> Decode(BinaryReader reader);
 }

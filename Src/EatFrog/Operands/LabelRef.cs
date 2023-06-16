@@ -2,12 +2,10 @@
 
 public class LabelRef : Operand
 {
-    private string Name { get; }
-    private ulong Address { get; }
+    public string Name { get; }
 
-    public LabelRef(string name, ulong address)
+    public LabelRef(string name)
     {
         Name = name;
-        Address = address;
     }
 }
