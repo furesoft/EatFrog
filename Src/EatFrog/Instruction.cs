@@ -6,7 +6,7 @@ public class Instruction<TOpcode>
     where TOpcode : struct
 {
     public TOpcode Opcode { get; }
-    public Operand[] Operands { get; set; }
+    public Operand[] Operands { get; set; } = Array.Empty<Operand>();
 
     public Instruction(TOpcode opcode)
     {

@@ -13,6 +13,7 @@ class X86Validator : InstructionValidator<TestOpcodes>
         For(TestOpcodes.Call).Operand(0, _ =>
         {
             _.OfType<Address>();
+            _.NotOfType<Value>();
         });
     }
 }
@@ -38,6 +39,15 @@ public class ValidatorTest
     
     [Test]
     public void OperandType_Should_Pass()
+    {
+        var instruction = new Instruction<TestOpcodes>(TestOpcodes.Call, new Address(0xC00FFEE));
+        var validationResult = _validator.Validate(instruction);
+        
+        Assert.IsTrue(validationResult);
+    }
+    
+    [Test]
+    public void OperandNotType_Should_Pass()
     {
         var instruction = new Instruction<TestOpcodes>(TestOpcodes.Call, new Address(0xC00FFEE));
         var validationResult = _validator.Validate(instruction);
