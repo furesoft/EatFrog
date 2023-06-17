@@ -2,12 +2,12 @@
 
 namespace EatFrog.Validation.Rules.OperandRules;
 
-internal class CascadeOperandValidatorRule : IOperandValidationRule
+internal class ConjunctionOperandValidatorRule : IOperandValidationRule
 {
     private readonly IOperandValidationRule _lhs;
     private readonly IOperandValidationRule _rhs;
 
-    public CascadeOperandValidatorRule(IOperandValidationRule lhs, IOperandValidationRule rhs)
+    public ConjunctionOperandValidatorRule(IOperandValidationRule lhs, IOperandValidationRule rhs)
     {
         _lhs = lhs;
         _rhs = rhs;

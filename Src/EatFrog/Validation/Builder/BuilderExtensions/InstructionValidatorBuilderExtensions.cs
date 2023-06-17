@@ -22,4 +22,11 @@ public static class InstructionValidatorBuilderExtensions
     {
         return builder.AddRule(new SingleOperandValidatorRule<TOpcode>(operandIndex, ruleBuilder));
     }
+
+    public static IInstructionValidatorBuilder<TOpcode> Or<TOpcode>(this IInstructionValidatorBuilder<TOpcode> builder,
+        InstructionValidatorRule<TOpcode> lhs, InstructionValidatorRule<TOpcode> rhs)
+        where TOpcode : struct
+    {
+        return builder.AddRule(new DisjunctionValidatorRule<TOpcode>(lhs, rhs));
+    }
 }

@@ -24,7 +24,7 @@ public class InstructionValidatorBuilder<TOpcode> : IInstructionValidatorBuilder
         }
         else
         {
-            _rule = new CascadeValidatorRule<TOpcode>(_rule, rule);
+            _rule = new ConjunctionValidatorRule<TOpcode>(_rule, rule);
             _rules[_opcode] = _rule;
         }
 

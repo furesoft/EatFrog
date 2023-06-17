@@ -10,7 +10,7 @@ internal class OperandValidationRuleBuilder : IOperandValidationRuleBuilder
 
     public IOperandValidationRuleBuilder AddRule(IOperandValidationRule rule)
     {
-        _rule = _rule == null ? rule : new CascadeOperandValidatorRule(_rule, rule);
+        _rule = _rule == null ? rule : new ConjunctionOperandValidatorRule(_rule, rule);
 
         return this;
     }
