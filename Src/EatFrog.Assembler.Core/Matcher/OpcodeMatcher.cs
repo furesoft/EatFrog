@@ -33,6 +33,6 @@ internal class OpcodeMatcher<T> : ILexerMatcher
             }
         }
         
-        return new Token("#opcode", lexer.Document.Source.Slice(oldIndex, index - oldIndex), line, oldColumn);
+        return new("#opcode", lexer.Document.Source.Slice(oldIndex, index - oldIndex), line, oldColumn);
     }
 }
