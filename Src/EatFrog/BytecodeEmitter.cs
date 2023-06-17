@@ -10,8 +10,10 @@ public abstract class BytecodeEmitter<TEncoder, TValidator, TOpcode, TRegister> 
     where TOpcode : struct
     where TRegister : struct
     where TValidator : InstructionValidator<TOpcode>, new()
+    where TAddressEncoder : IAddressEncoder, new()
 {
     private readonly TEncoder _encoder = new();
+    private readonly TAddressEncoder _addressEncoder = new();
     private readonly TValidator _validator = new();
     private readonly Dictionary<string, ulong> _labels = new();
     private BinaryStream _writer;
