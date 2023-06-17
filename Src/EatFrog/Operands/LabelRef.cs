@@ -8,4 +8,6 @@ public class LabelRef : Operand
     {
         Name = name;
     }
+    
+    public override string ToString() => $"{Name}";
 }

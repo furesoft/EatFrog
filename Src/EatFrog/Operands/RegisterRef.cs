@@ -2,10 +2,12 @@
 
 public class RegisterRef<TRegister> : Operand
 {
-    public TRegister Name { get; }
+    public TRegister Register { get; }
 
-    public RegisterRef(TRegister name)
+    public RegisterRef(TRegister register)
     {
-        Name = name;
+        Register = register;
     }
+    
+    public override string ToString() => $"{Register}";
 }

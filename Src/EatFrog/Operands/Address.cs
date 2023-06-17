@@ -8,4 +8,6 @@ public class Address : Operand
     {
         Value = value;
     }
+
+    public override string ToString() => $"{Value}";
 }

@@ -8,4 +8,6 @@ public class Value : Operand
     {
         Amount = amount;
     }
+    
+    public override string ToString() => $"%{Amount}";
 }

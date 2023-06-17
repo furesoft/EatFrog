@@ -8,4 +8,6 @@ public class IndirectAddress : Operand
     {
         Address = address;
     }
+    
+    public override string ToString() => $"*{Address}";
 }
