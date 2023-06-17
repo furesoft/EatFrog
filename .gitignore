@@ -489,3 +489,6 @@ fabric.properties
 !.idea/runConfigurations
 
 # End of https://www.toptal.com/developers/gitignore/api/intellij+all
+Src/EatFrog/.idea/.idea.EatFrog/.idea/
+
+Src/.idea/.idea.EatFrog/.idea/
