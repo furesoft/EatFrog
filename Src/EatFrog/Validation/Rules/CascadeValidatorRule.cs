@@ -1,4 +1,4 @@
-﻿namespace EatFrog.Validation;
+﻿namespace EatFrog.Validation.Rules;
 
 public class CascadeValidatorRule<TOpcode> : InstructionValidatorRule<TOpcode>
     where TOpcode : struct

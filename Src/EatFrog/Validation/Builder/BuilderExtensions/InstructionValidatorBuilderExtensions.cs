@@ -1,6 +1,6 @@
 ﻿using EatFrog.Validation.Rules;
 
-namespace EatFrog.Validation;
+namespace EatFrog.Validation.Builder.BuilderExtensions;
 
 public static class InstructionValidatorBuilderExtensions
 {
@@ -14,5 +14,12 @@ public static class InstructionValidatorBuilderExtensions
         where TOpcode : struct
     {
         return builder.MaxOperands(0);
+    }
+
+    public static IInstructionValidatorBuilder<TOpcode> Operand<TOpcode>(this IInstructionValidatorBuilder<TOpcode> builder, int operandIndex,
+        Action<IOperandValidationRuleBuilder> ruleBuilder)
+        where TOpcode : struct
+    {
+        return builder.AddRule(new SingleOperandValidatorRule<TOpcode>(operandIndex, ruleBuilder));
     }
 }

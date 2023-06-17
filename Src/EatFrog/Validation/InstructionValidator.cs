@@ -1,4 +1,6 @@
-﻿namespace EatFrog.Validation;
+﻿using EatFrog.Validation.Builder;
+
+namespace EatFrog.Validation;
 
 public abstract class InstructionValidator<TOpcode> 
     where TOpcode : struct
