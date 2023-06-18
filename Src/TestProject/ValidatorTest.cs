@@ -1,37 +1,17 @@
 ﻿using EatFrog;
 using EatFrog.Operands;
-using EatFrog.Validation;
-using EatFrog.Validation.Builder.BuilderExtensions;
+using EatFrog.Platforms.X86;
 
 namespace TestProject;
 
-class X86Validator : InstructionValidator<TestOpcodes>
-{
-    public X86Validator()
-    {
-        For(TestOpcodes.Ret).NoOperands();
-        For(TestOpcodes.Call).Operand(0, _ =>
-        {
-            _.OfType<Address>();
-            _.NotOfType<Value>();
-        });
-    }
-}
-
 public class ValidatorTest
 {
-    private readonly X86Validator _validator = new X86Validator();
-    
-    [SetUp]
-    public void Setup()
-    {
-        
-    }
+    private readonly X86InstructionValidator _validator = new();
 
     [Test]
     public void NoOperand_Should_Pass()
     {
-        var instruction = new Instruction<TestOpcodes>(TestOpcodes.Ret);
+        var instruction = new Instruction<X86Opcode>(X86Opcode.RET);
         var validationResult = _validator.Validate(instruction);
         
         Assert.IsTrue(validationResult);
@@ -40,7 +20,7 @@ public class ValidatorTest
     [Test]
     public void OperandType_Should_Pass()
     {
-        var instruction = new Instruction<TestOpcodes>(TestOpcodes.Call, new Address(0xC00FFEE));
+        var instruction = new Instruction<X86Opcode>(X86Opcode.CALL, new Address(0xC00FFEE));
         var validationResult = _validator.Validate(instruction);
         
         Assert.IsTrue(validationResult);
@@ -49,7 +29,7 @@ public class ValidatorTest
     [Test]
     public void OperandNotType_Should_Pass()
     {
-        var instruction = new Instruction<TestOpcodes>(TestOpcodes.Call, new Address(0xC00FFEE));
+        var instruction = new Instruction<X86Opcode>(X86Opcode.CALL, new Value(0xC00FFEE));
         var validationResult = _validator.Validate(instruction);
         
         Assert.IsTrue(validationResult);

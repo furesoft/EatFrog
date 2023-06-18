@@ -1,0 +1,37 @@
+﻿namespace EatFrog.Platforms.X86;
+
+public enum X86Opcode
+{
+    MOV = 0x89,
+    ADD = 0x03,
+    SUB = 0x2B,
+    AND = 0x21,
+    OR = 0x0B,
+    XOR = 0x33,
+    CMP = 0x3B,
+    JMP = 0xE9,
+    JZ = 0x74,
+    JNZ = 0x75,
+    CALL = 0xE8,
+    RET = 0xC3,
+    PUSH = 0x50,
+    POP = 0x58,
+    INC = 0xFF,
+    DEC = 0xFF,
+    MUL = 0xF7,
+    DIV = 0xF7,
+    NOT = 0xF7,
+    SHR = 0xD1,
+    SHL = 0xD1,
+    NOP = 0x90,
+    LEA = 0x8D,
+    TEST = 0x85,
+    XCHG = 0x87,
+    ADC = 0x11,
+    SBB = 0x19,
+    NEG = 0xF7,
+    LOOP = 0xE2,
+    CMPXCHG = 0x0F_B0,
+    BSF = 0x0F_BC,
+    BSR = 0x0F_BD
+}

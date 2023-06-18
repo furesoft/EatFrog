@@ -23,6 +23,7 @@
     <ItemGroup>
       <ProjectReference Include="..\EatFrog.Assembler.Core\EatFrog.Assembler.Core.csproj" />
       <ProjectReference Include="..\EatFrog\EatFrog.csproj" />
+      <ProjectReference Include="..\Platforms\EatFrog.Platforms.X86\EatFrog.Platforms.X86.csproj" />
     </ItemGroup>
 
 </Project>

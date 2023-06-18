@@ -1,5 +1,5 @@
 using Furesoft.PrattParser;
-using AParser = EatFrog.Assembler.Core.AssemblyParser<TestProject.TestOpcodes>;
+using AParser = EatFrog.Assembler.Core.AssemblyParser<EatFrog.Platforms.X86.X86Opcode>;
 
 namespace TestProject;
 
