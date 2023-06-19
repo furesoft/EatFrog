@@ -33,5 +33,14 @@ public enum X86Opcode
     LOOP = 0xE2,
     CMPXCHG = 0x0F_B0,
     BSF = 0x0F_BC,
-    BSR = 0x0F_BD
+    BSR = 0x0F_BD,
+    DIVSD = 0xF2_0F_5E,
+    MULSD = 0xF2_0F_59,
+    COMISD = 0x0F_2F,
+    UCOMISD = 0x0F_2E,
+    SQRTSD = 0xF2_0F_51,
+    CVTSI2SD = 0xF2_0F_2A,
+    CVTSD2SI = 0xF2_0F_2D,
+    CVTTSD2SI = 0xF2_0F_2C,
+    MOVSD = 0xF2_0F_10
 }
