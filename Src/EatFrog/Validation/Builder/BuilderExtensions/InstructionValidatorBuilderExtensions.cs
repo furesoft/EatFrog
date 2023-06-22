@@ -10,6 +10,12 @@ public static class InstructionValidatorBuilderExtensions
         return builder.AddRule(new MaxOperandCountRule<TOpcode>(maxOperandCount));
     }
     
+    public static IInstructionValidatorBuilder<TOpcode> OpCount<TOpcode>(this IInstructionValidatorBuilder<TOpcode> builder, int count)
+        where TOpcode : struct
+    {
+        return builder.AddRule(new OperandCountRule<TOpcode>(count));
+    }
+    
     public static IInstructionValidatorBuilder<TOpcode> NoOperands<TOpcode>(this IInstructionValidatorBuilder<TOpcode> builder)
         where TOpcode : struct
     {
