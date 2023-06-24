@@ -23,4 +23,35 @@ public static class OperandValidatorBuilderExtensions
     {
         return builder.AddRule(new DisjunctionOperandValidatorRule(lhs, rhs));
     }
+    
+    public static IOperandValidationRuleBuilder Kinds<TFirst>(this IOperandValidationRuleBuilder builder,
+        int operandIndex)
+        where TFirst : Operand
+    {
+        return builder.AddRule(new KindValidatorRule<TFirst>());
+    }
+    
+    public static IOperandValidationRuleBuilder Kinds<TFirst, TSecond>(this IOperandValidationRuleBuilder builder)
+        where TFirst : Operand
+        where TSecond : Operand
+    {
+        return builder.AddRule(new KindValidatorRule<TFirst, TSecond>());
+    }
+    
+    public static IOperandValidationRuleBuilder Kinds<TFirst, TSecond, TThird>(this IOperandValidationRuleBuilder builder)
+        where TFirst : Operand
+        where TSecond : Operand
+        where TThird : Operand
+    {
+        return builder.AddRule(new KindValidatorRule<TFirst, TSecond, TThird>());
+    }
+    
+    public static IOperandValidationRuleBuilder Kinds<TFirst, TSecond, TThird, TFourth>(this IOperandValidationRuleBuilder builder)
+        where TFirst : Operand
+        where TSecond : Operand
+        where TThird : Operand
+        where TFourth : Operand
+    {
+        return builder.AddRule(new KindValidatorRule<TFirst, TSecond, TThird, TFourth>());
+    }
 }
