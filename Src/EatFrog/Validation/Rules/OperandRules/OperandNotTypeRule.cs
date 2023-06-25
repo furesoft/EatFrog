@@ -5,8 +5,13 @@ namespace EatFrog.Validation.Rules.OperandRules;
 internal class OperandNotTypeRule<TOperandType> : IOperandValidationRule
     where TOperandType : Operand
 {
-    public bool Validate(Operand operand)
+    public ValidationResult Validate(Operand operand)
     {
-        return operand is not TOperandType;
+        if (operand is not TOperandType)
+        {
+            return true;
+        }
+
+        return $"Operand cannot be {operand.GetType()}";
     }
 }

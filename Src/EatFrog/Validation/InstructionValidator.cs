@@ -12,7 +12,7 @@ public abstract class InstructionValidator<TOpcode>
         return new InstructionValidatorBuilder<TOpcode>(opcode, _rules);
     }
 
-    public bool Validate(Instruction<TOpcode> instruction)
+    public ValidationResult Validate(Instruction<TOpcode> instruction)
     {
         if (_rules.TryGetValue(instruction.Opcode, out var validator))
         {

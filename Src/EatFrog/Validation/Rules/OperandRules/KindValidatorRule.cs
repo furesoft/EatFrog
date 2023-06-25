@@ -4,32 +4,39 @@ namespace EatFrog.Validation.Rules.OperandRules;
 
 public class KindValidatorRule<TFirst> : IOperandValidationRule
 {
-    public bool Validate(Operand operand)
+    public ValidationResult Validate(Operand operand)
     {
-        return operand is TFirst;
+        if (operand is TFirst)
+        {
+            return true;
+        }
+
+        return $"{operand} has to be of type {typeof(TFirst)}";
     }
 }
 
 public class KindValidatorRule<TFirst, TSecond> : IOperandValidationRule
 {
-    public bool Validate(Operand operand)
+    public ValidationResult Validate(Operand operand)
     {
-        return operand is TFirst or TSecond;
+        if (operand is TFirst or TSecond)
+        {
+            return true;
+        }
+
+        return $"{operand} has to be of type {typeof(TFirst)} or {typeof(TSecond)}";
     }
 }
 
 public class KindValidatorRule<TFirst, TSecond, TThird> : IOperandValidationRule
 {
-    public bool Validate(Operand operand)
+    public ValidationResult Validate(Operand operand)
     {
-        return operand is TFirst or TSecond or TThird;
-    }
-}
+        if (operand is TFirst or TSecond or TThird)
+        {
+            return true;
+        }
 
-public class KindValidatorRule<TFirst, TSecond, TThird, TFourth> : IOperandValidationRule
-{
-    public bool Validate(Operand operand)
-    {
-        return operand is TFirst or TSecond or TThird or TFourth;
+        return $"{operand} has to be of type {typeof(TFirst)} or {typeof(TSecond)} or {typeof(TThird)}";
     }
 }

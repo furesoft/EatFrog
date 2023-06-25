@@ -2,15 +2,20 @@
 
 internal class OperandCountRule<TOperand> : InstructionValidatorRule<TOperand> where TOperand : struct
 {
-    private readonly int _max;
+    private readonly int _count;
 
-    public OperandCountRule(int max)
+    public OperandCountRule(int count)
     {
-        _max = max;
+        _count = count;
     }
-    
-    public override bool Validate(Instruction<TOperand> instruction)
+
+    public override ValidationResult Validate(Instruction<TOperand> instruction)
     {
-        return instruction.Operands.Length == _max;
+        if (instruction.Operands.Length == _count)
+        {
+            return true;
+        }
+
+        return $"{instruction.Opcode} expects {_count} operands";
     }
 }

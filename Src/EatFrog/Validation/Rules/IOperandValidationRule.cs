@@ -4,5 +4,5 @@ namespace EatFrog.Validation.Rules;
 
 public interface IOperandValidationRule
 {
-    bool Validate(Operand operand);
+    ValidationResult Validate(Operand operand);
 }

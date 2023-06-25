@@ -5,8 +5,13 @@ namespace EatFrog.Validation.Rules.OperandRules;
 internal class OperandTypeRule<TOperandType> : IOperandValidationRule
     where TOperandType : Operand
 {
-    public bool Validate(Operand operand)
+    public ValidationResult Validate(Operand operand)
     {
-        return operand is TOperandType;
+        if (operand is TOperandType)
+        {
+            return true;
+        }
+
+        return $"Expects {typeof(TOperandType)}";
     }
 }

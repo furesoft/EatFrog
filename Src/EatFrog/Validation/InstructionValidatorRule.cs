@@ -3,5 +3,5 @@
 public abstract class InstructionValidatorRule<TOpcode>
     where TOpcode : struct
 {
-    public abstract bool Validate(Instruction<TOpcode> instruction);
+    public abstract ValidationResult Validate(Instruction<TOpcode> instruction);
 }

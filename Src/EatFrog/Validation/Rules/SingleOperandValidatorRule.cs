@@ -14,7 +14,7 @@ internal class SingleOperandValidatorRule<TOpcode> : InstructionValidatorRule<TO
         _builder = builder;
     }
     
-    public override bool Validate(Instruction<TOpcode> instruction)
+    public override ValidationResult Validate(Instruction<TOpcode> instruction)
     {
         var opValidatorBuilder = new OperandValidationRuleBuilder();
 

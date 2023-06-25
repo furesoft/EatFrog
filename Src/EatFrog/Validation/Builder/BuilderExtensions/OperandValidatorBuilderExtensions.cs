@@ -44,13 +44,4 @@ public static class OperandValidatorBuilderExtensions
     {
         return builder.AddRule(new KindValidatorRule<TFirst, TSecond, TThird>());
     }
-    
-    public static IOperandValidationRuleBuilder Kinds<TFirst, TSecond, TThird, TFourth>(this IOperandValidationRuleBuilder builder)
-        where TFirst : Operand
-        where TSecond : Operand
-        where TThird : Operand
-        where TFourth : Operand
-    {
-        return builder.AddRule(new KindValidatorRule<TFirst, TSecond, TThird, TFourth>());
-    }
 }

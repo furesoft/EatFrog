@@ -13,7 +13,7 @@ internal class DisjunctionOperandValidatorRule : IOperandValidationRule
         _rhs = rhs;
     }
 
-    public bool Validate(Operand operand)
+    public ValidationResult Validate(Operand operand)
     {
         return _lhs.Validate(operand) || _rhs.Validate(operand);
     }

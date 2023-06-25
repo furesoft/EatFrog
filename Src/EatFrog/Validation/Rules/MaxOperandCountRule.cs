@@ -9,8 +9,13 @@ internal class MaxOperandCountRule<TOperand> : InstructionValidatorRule<TOperand
         _maxOperands = maxOperands;
     }
     
-    public override bool Validate(Instruction<TOperand> instruction)
+    public override ValidationResult Validate(Instruction<TOperand> instruction)
     {
-        return instruction.Operands.Length <= _maxOperands;
+        if (instruction.Operands.Length <= _maxOperands)
+        {
+            return true;
+        }
+
+        return $"{instruction.Opcode} has more operands than it's valid";
     }
 }

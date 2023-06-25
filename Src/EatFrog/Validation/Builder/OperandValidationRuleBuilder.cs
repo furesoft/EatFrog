@@ -15,7 +15,7 @@ internal class OperandValidationRuleBuilder : IOperandValidationRuleBuilder
         return this;
     }
 
-    public bool Validate(Operand instructionOperand)
+    public ValidationResult Validate(Operand instructionOperand)
     {
         return _rule.Validate(instructionOperand);
     }
