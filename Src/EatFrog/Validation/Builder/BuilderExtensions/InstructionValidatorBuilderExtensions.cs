@@ -28,6 +28,20 @@ public static class InstructionValidatorBuilderExtensions
     {
         return builder.AddRule(new SingleOperandValidatorRule<TOpcode>(operandIndex, ruleBuilder));
     }
+    
+    public static IInstructionValidatorBuilder<TOpcode> Operands<TOpcode>(this IInstructionValidatorBuilder<TOpcode> builder, 
+        params Action<IOperandValidationRuleBuilder>[] ruleBuilders)
+        where TOpcode : struct
+    {
+        builder.OpCount(ruleBuilders.Length);
+        
+        for (int i = 0; i < ruleBuilders.Length; i++)
+        {
+            builder.Operand(i, ruleBuilders[i]);
+        }
+
+        return builder;
+    }
 
     public static IInstructionValidatorBuilder<TOpcode> Or<TOpcode>(this IInstructionValidatorBuilder<TOpcode> builder,
         InstructionValidatorRule<TOpcode> lhs, InstructionValidatorRule<TOpcode> rhs)

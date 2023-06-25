@@ -24,8 +24,7 @@ public static class OperandValidatorBuilderExtensions
         return builder.AddRule(new DisjunctionOperandValidatorRule(lhs, rhs));
     }
     
-    public static IOperandValidationRuleBuilder Kinds<TFirst>(this IOperandValidationRuleBuilder builder,
-        int operandIndex)
+    public static IOperandValidationRuleBuilder Kinds<TFirst>(this IOperandValidationRuleBuilder builder)
         where TFirst : Operand
     {
         return builder.AddRule(new KindValidatorRule<TFirst>());
