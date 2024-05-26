@@ -1,4 +1,5 @@
-﻿using Syroot.BinaryData;
+﻿using EatFrog.Platforms.X86;
+using Syroot.BinaryData;
 
 namespace EatFrog.Platforms.X86;
 
