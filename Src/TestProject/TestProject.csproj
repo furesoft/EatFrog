@@ -21,7 +21,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\EatFrog.Assembler.Core\EatFrog.Assembler.Core.csproj" />
       <ProjectReference Include="..\EatFrog\EatFrog.csproj" />
       <ProjectReference Include="..\Platforms\EatFrog.Platforms.X86\EatFrog.Platforms.X86.csproj" />
       <ProjectReference Include="..\Platforms\EatFrog.Platforms.Chip8\EatFrog.Platforms.Chip8.csproj" />
