@@ -27,4 +27,9 @@
       <ProjectReference Include="..\Platforms\EatFrog.Platforms.Chip8\EatFrog.Platforms.Chip8.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Include="test_opcode.ch8">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
 </Project>

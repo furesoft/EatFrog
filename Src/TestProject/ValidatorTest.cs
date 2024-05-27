@@ -6,7 +6,14 @@ namespace TestProject;
 
 public class ValidatorTest
 {
-    private readonly X86InstructionValidator _validator = new();
+    private X86InstructionValidator _validator;
+
+    
+    [SetUp]
+    public void Setup()
+    {
+        _validator = new();
+    }
 
     [Test]
     public void NoOperand_Should_Pass()
