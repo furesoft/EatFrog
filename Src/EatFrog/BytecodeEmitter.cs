@@ -5,7 +5,7 @@ using Syroot.BinaryData.Core;
 
 namespace EatFrog;
 
-public abstract class BytecodeEmitter<TEncoder, TValidator, TOpcode, TRegister> : IDisposable
+public abstract class BytecodeEmitter<TEncoder, TValidator, TOpcode, TRegister, TAddressEncoder> : IDisposable
     where TEncoder : InstructionEncoder<TOpcode>, new()
     where TOpcode : struct
     where TRegister : struct
@@ -49,7 +49,7 @@ public abstract class BytecodeEmitter<TEncoder, TValidator, TOpcode, TRegister> 
 
     public bool Emit(Instruction<TOpcode> instruction)
     {
-        if (!_validator.Validate(instruction))
+        if (!_validator.Validate(instruction).IsSuccess)
         {
             return false;
         }

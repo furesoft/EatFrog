@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net7.0</TargetFramework>
+        <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
 
@@ -24,6 +24,7 @@
       <ProjectReference Include="..\EatFrog.Assembler.Core\EatFrog.Assembler.Core.csproj" />
       <ProjectReference Include="..\EatFrog\EatFrog.csproj" />
       <ProjectReference Include="..\Platforms\EatFrog.Platforms.X86\EatFrog.Platforms.X86.csproj" />
+      <ProjectReference Include="..\Platforms\EatFrog.Platforms.Chip8\EatFrog.Platforms.Chip8.csproj" />
     </ItemGroup>
 
 </Project>
