@@ -12,6 +12,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\EatFrog\EatFrog.csproj" />
+      <ProjectReference Include="..\..\EatFrog.Assembler.Core\EatFrog.Assembler.Core.csproj" />
     </ItemGroup>
 
 </Project>
