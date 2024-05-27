@@ -5,7 +5,7 @@ using Furesoft.PrattParser.Nodes;
 
 namespace EatFrog.Assembler.Core;
 
-public abstract class AssemblyParser<TOpcode> : Parser<AstNode>
+public class AssemblyParser<TOpcode> : Parser<AstNode>
     where TOpcode : struct
 {
     public AssemblyParser()

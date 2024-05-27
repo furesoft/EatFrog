@@ -6,14 +6,7 @@ namespace TestProject;
 
 public class ValidatorTest
 {
-    private X86InstructionValidator _validator;
-
-    
-    [SetUp]
-    public void Setup()
-    {
-        _validator = new();
-    }
+    private readonly X86InstructionValidator _validator = new();
 
     [Test]
     public void NoOperand_Should_Pass()
@@ -27,7 +20,7 @@ public class ValidatorTest
     [Test]
     public void OperandType_Should_Pass()
     {
-        var instruction = new Instruction<X86Opcode>(X86Opcode.CALL, new Address(0xC00FFEE));
+        var instruction = new Instruction<X86Opcode>(X86Opcode.CALL, new Offset(0xC00FFEE));
         var validationResult = _validator.Validate(instruction);
         
         Assert.IsTrue(validationResult.IsSuccess);
@@ -39,6 +32,6 @@ public class ValidatorTest
         var instruction = new Instruction<X86Opcode>(X86Opcode.CALL, new Value(0xC00FFEE));
         var validationResult = _validator.Validate(instruction);
         
-        Assert.IsTrue(validationResult.IsSuccess);
+        Assert.IsTrue(!validationResult.IsSuccess);
     }
 }

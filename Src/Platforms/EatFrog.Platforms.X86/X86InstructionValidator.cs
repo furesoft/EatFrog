@@ -53,12 +53,12 @@ public class X86InstructionValidator : InstructionValidator<X86Opcode>
         For(X86Opcode.INC).Operands( _ => _.Kinds<RegisterRef<X86Register>>());
         For(X86Opcode.DEC).Operands( _ => _.Kinds<RegisterRef<X86Register>>());
         
-        For(X86Opcode.MUL).Operands(_ => _.Kinds<RegisterRef<X86Register>, Value>());
-        For(X86Opcode.DIV).Operands(_ => _.Kinds<RegisterRef<X86Register>, Value>());
+       // For(X86Opcode.MUL).Operands(_ => _.Kinds<RegisterRef<X86Register>, Value>());
+        //For(X86Opcode.DIV).Operands(_ => _.Kinds<RegisterRef<X86Register>, Value>());
         
-        For(X86Opcode.NOT).Operands(_ => _.Kinds<RegisterRef<X86Register>>());
+        //For(X86Opcode.NOT).Operands(_ => _.Kinds<RegisterRef<X86Register>>());
         
-        For(X86Opcode.SHR).Operands(
+        /*For(X86Opcode.SHR).Operands(
             _ => _.Kinds<RegisterRef<X86Register>, Value>(),
             _ => _.Kinds<RegisterRef<X86Register>, RegisterRef<X86Register>>()
         );
@@ -66,7 +66,7 @@ public class X86InstructionValidator : InstructionValidator<X86Opcode>
             _ => _.Kinds<RegisterRef<X86Register>, Value>(),
             _ => _.Kinds<RegisterRef<X86Register>, RegisterRef<X86Register>>()
         );
-        
+        */
         For(X86Opcode.NOP).NoOperands();
         For(X86Opcode.LEA).Operands(
             _ => _.Kinds<RegisterRef<X86Register>, Address>()
