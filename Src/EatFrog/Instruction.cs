@@ -2,16 +2,11 @@
 
 namespace EatFrog;
 
-public class Instruction<TOpcode>
+public class Instruction<TOpcode>(TOpcode opcode)
     where TOpcode : struct
 {
-    public TOpcode Opcode { get; }
-    public Operand[] Operands { get; set; } = Array.Empty<Operand>();
-
-    public Instruction(TOpcode opcode)
-    {
-        Opcode = opcode;
-    }
+    public TOpcode Opcode { get; } = opcode;
+    public Operand[] Operands { get; set; } = [];
 
     public Instruction(TOpcode opcode, params Operand[] operands)
         : this(opcode)

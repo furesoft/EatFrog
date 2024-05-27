@@ -2,18 +2,12 @@
 
 namespace EatFrog.Validation.Rules;
 
-internal class SingleOperandValidatorRule<TOpcode> : InstructionValidatorRule<TOpcode>
+internal class SingleOperandValidatorRule<TOpcode>(int operandIndex, Action<IOperandValidationRuleBuilder> builder) : InstructionValidatorRule<TOpcode>
     where TOpcode : struct
 {
-    private readonly int _operandIndex;
-    private readonly Action<IOperandValidationRuleBuilder> _builder;
+    private readonly int _operandIndex = operandIndex;
+    private readonly Action<IOperandValidationRuleBuilder> _builder = builder;
 
-    public SingleOperandValidatorRule(int operandIndex, Action<IOperandValidationRuleBuilder> builder)
-    {
-        _operandIndex = operandIndex;
-        _builder = builder;
-    }
-    
     public override ValidationResult Validate(Instruction<TOpcode> instruction)
     {
         var opValidatorBuilder = new OperandValidationRuleBuilder();

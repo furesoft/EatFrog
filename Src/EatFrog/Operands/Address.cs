@@ -1,13 +1,8 @@
 ﻿namespace EatFrog.Operands;
 
-public class Address : Operand
+public class Address(ulong value) : Operand
 {
-    public ulong Value { get; }
-
-    public Address(ulong value)
-    {
-        Value = value;
-    }
+    public ulong Value { get; } = value;
 
     public override string ToString() => $"{Value}";
 }

@@ -2,18 +2,12 @@
 
 namespace EatFrog.Validation.Builder;
 
-public class InstructionValidatorBuilder<TOpcode> : IInstructionValidatorBuilder<TOpcode>
+public class InstructionValidatorBuilder<TOpcode>(TOpcode opcode, Dictionary<TOpcode, InstructionValidatorRule<TOpcode>> rules) : IInstructionValidatorBuilder<TOpcode>
     where TOpcode : struct
 {
-    private readonly TOpcode _opcode;
-    private readonly Dictionary<TOpcode, InstructionValidatorRule<TOpcode>> _rules;
+    private readonly TOpcode _opcode = opcode;
+    private readonly Dictionary<TOpcode, InstructionValidatorRule<TOpcode>> _rules = rules;
     private InstructionValidatorRule<TOpcode> _rule;
-
-    public InstructionValidatorBuilder(TOpcode opcode, Dictionary<TOpcode, InstructionValidatorRule<TOpcode>> rules)
-    {
-        _opcode = opcode;
-        _rules = rules;
-    }
 
     public IInstructionValidatorBuilder<TOpcode> AddRule(InstructionValidatorRule<TOpcode> rule)
     {

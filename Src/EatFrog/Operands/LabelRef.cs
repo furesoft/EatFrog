@@ -1,13 +1,8 @@
 ﻿namespace EatFrog.Operands;
 
-public class LabelRef : Operand
+public class LabelRef(string name) : Operand
 {
-    public string Name { get; }
+    public string Name { get; } = name;
 
-    public LabelRef(string name)
-    {
-        Name = name;
-    }
-    
     public override string ToString() => $"{Name}";
 }

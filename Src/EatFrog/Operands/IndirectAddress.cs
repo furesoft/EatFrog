@@ -1,13 +1,8 @@
 ﻿namespace EatFrog.Operands;
 
-public class IndirectAddress : Operand
+public class IndirectAddress(ulong address) : Operand
 {
-    public ulong Address { get; }
+    public ulong Address { get; } = address;
 
-    public IndirectAddress(ulong address)
-    {
-        Address = address;
-    }
-    
     public override string ToString() => $"*{Address}";
 }

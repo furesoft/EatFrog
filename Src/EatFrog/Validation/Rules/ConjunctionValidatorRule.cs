@@ -1,16 +1,10 @@
 ﻿namespace EatFrog.Validation.Rules;
 
-public class ConjunctionValidatorRule<TOpcode> : InstructionValidatorRule<TOpcode>
+public class ConjunctionValidatorRule<TOpcode>(InstructionValidatorRule<TOpcode> lhs, InstructionValidatorRule<TOpcode> rhs) : InstructionValidatorRule<TOpcode>
     where TOpcode : struct
 {
-    private readonly InstructionValidatorRule<TOpcode> _lhs;
-    private readonly InstructionValidatorRule<TOpcode> _rhs;
-
-    public ConjunctionValidatorRule(InstructionValidatorRule<TOpcode> lhs, InstructionValidatorRule<TOpcode> rhs)
-    {
-        _lhs = lhs;
-        _rhs = rhs;
-    }
+    private readonly InstructionValidatorRule<TOpcode> _lhs = lhs;
+    private readonly InstructionValidatorRule<TOpcode> _rhs = rhs;
 
     public override ValidationResult Validate(Instruction<TOpcode> instruction)
     {

@@ -1,13 +1,8 @@
 ﻿namespace EatFrog.Validation.Rules;
 
-internal class OperandCountRule<TOperand> : InstructionValidatorRule<TOperand> where TOperand : struct
+internal class OperandCountRule<TOperand>(int count) : InstructionValidatorRule<TOperand> where TOperand : struct
 {
-    private readonly int _count;
-
-    public OperandCountRule(int count)
-    {
-        _count = count;
-    }
+    private readonly int _count = count;
 
     public override ValidationResult Validate(Instruction<TOperand> instruction)
     {

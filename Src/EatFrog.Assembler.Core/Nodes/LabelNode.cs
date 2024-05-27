@@ -2,12 +2,7 @@
 
 namespace EatFrog.Assembler.Core.Nodes;
 
-internal class LabelNode : AstNode
+internal class LabelNode(string name) : AstNode
 {
-    public LabelNode(string name)
-    {
-        Name = name;
-    }
-
-    public string Name { get; set; }
+    public string Name { get; set; } = name;
 }

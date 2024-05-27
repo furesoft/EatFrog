@@ -1,14 +1,9 @@
 ﻿namespace EatFrog.Validation.Rules;
 
-internal class MaxOperandCountRule<TOperand> : InstructionValidatorRule<TOperand> where TOperand : struct
+internal class MaxOperandCountRule<TOperand>(int maxOperands) : InstructionValidatorRule<TOperand> where TOperand : struct
 {
-    private readonly int _maxOperands;
+    private readonly int _maxOperands = maxOperands;
 
-    public MaxOperandCountRule(int maxOperands)
-    {
-        _maxOperands = maxOperands;
-    }
-    
     public override ValidationResult Validate(Instruction<TOperand> instruction)
     {
         if (instruction.Operands.Length <= _maxOperands)

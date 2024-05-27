@@ -1,13 +1,8 @@
 ﻿namespace EatFrog.Operands;
 
-public class Offset : Operand
+public class Offset(long value) : Operand
 {
-    public long Value { get; }
-
-    public Offset(long value)
-    {
-        Value = value;
-    }
+    public long Value { get; } = value;
 
     public override string ToString()
     {
