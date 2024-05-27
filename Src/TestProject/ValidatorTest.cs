@@ -14,7 +14,7 @@ public class ValidatorTest
         var instruction = new Instruction<X86Opcode>(X86Opcode.RET);
         var validationResult = _validator.Validate(instruction);
         
-        Assert.IsTrue(validationResult);
+        Assert.IsTrue(validationResult.IsSuccess);
     }
     
     [Test]
@@ -23,7 +23,7 @@ public class ValidatorTest
         var instruction = new Instruction<X86Opcode>(X86Opcode.CALL, new Address(0xC00FFEE));
         var validationResult = _validator.Validate(instruction);
         
-        Assert.IsTrue(validationResult);
+        Assert.IsTrue(validationResult.IsSuccess);
     }
     
     [Test]
@@ -32,6 +32,6 @@ public class ValidatorTest
         var instruction = new Instruction<X86Opcode>(X86Opcode.CALL, new Value(0xC00FFEE));
         var validationResult = _validator.Validate(instruction);
         
-        Assert.IsTrue(validationResult);
+        Assert.IsTrue(validationResult.IsSuccess);
     }
 }
