@@ -1,3 +1,4 @@
+using EatFrog;
 using EatFrog.Platforms.Chip8;
 
 namespace TestProject;
@@ -13,9 +14,21 @@ public class AssemblyTests
     [Test]
     public void Read_Should_Pass()
     {
-        var tree = new Chip8Assembly();
+        var assembly = new Chip8Assembly();
         var testRom = File.OpenRead("test_opcode.ch8");
 
-        tree.Load(testRom);
+        assembly.Load(testRom);
+    }
+
+    [Test]
+    public void Write_Should_Pass()
+    {
+        var assembly = new Chip8Assembly();
+        var testRom = File.OpenWrite("test.ch8");
+
+        assembly.Instructions.Add(new Instruction<Chip8Opcode>(Chip8Opcode.RET));
+        assembly.Instructions.Add(new Instruction<Chip8Opcode>(Chip8Opcode.CLS));
+
+        assembly.Save(testRom);
     }
 }

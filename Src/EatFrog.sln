@@ -5,8 +5,6 @@ VisualStudioVersion = 17.6.33712.159
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EatFrog", "EatFrog\EatFrog.csproj", "{727E1D1F-4F57-439E-9E0E-6CD890947FB8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EatFrog.Assembler.Core", "EatFrog.Assembler.Core\EatFrog.Assembler.Core.csproj", "{19118329-4ED3-4894-93C9-94E0BBC2E438}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Platforms", "Platforms", "{20C63273-E794-4B62-B7FE-46313E4B196E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EatFrog.Platforms.X86", "Platforms\EatFrog.Platforms.X86\EatFrog.Platforms.X86.csproj", "{C33CD19E-1013-4256-8408-0851BA248A3E}"
