@@ -5,7 +5,7 @@ using Syroot.BinaryData.Core;
 
 namespace EatFrog;
 
-public abstract class Maschine<TOpCode, TRegister, TInstructionDecoder, TInstructionEncoder, TInstructionValidator, TAddressEncoder>(Endian endian)
+public abstract class RegisterMaschine<TOpCode, TRegister, TInstructionDecoder, TInstructionEncoder, TInstructionValidator, TAddressEncoder>(Endian endian)
     where TOpCode : struct
     where TRegister : struct
     where TInstructionDecoder : InstructionDecoder<TOpCode>, new()
@@ -26,7 +26,7 @@ public abstract class Maschine<TOpCode, TRegister, TInstructionDecoder, TInstruc
 
     public BytecodeEmitter<TInstructionEncoder, TInstructionValidator, TOpCode, TRegister, TAddressEncoder> NewEmitter(Stream strm)
     {
-        var emitter = (BytecodeEmitter<TInstructionEncoder, TInstructionValidator, TOpCode, TRegister, TAddressEncoder>) Activator.CreateInstance(Emitter.GetType(), Endian);
+        var emitter = (BytecodeEmitter<TInstructionEncoder, TInstructionValidator, TOpCode, TRegister, TAddressEncoder>)Activator.CreateInstance(Emitter.GetType(), Endian);
 
         emitter.SetTarget(strm);
 
