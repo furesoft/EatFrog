@@ -7,6 +7,7 @@ namespace TestProject;
 
 public class ParsingTests
 {
+    Chip8Maschine maschine = new();
     [SetUp]
     public void Setup()
     {
@@ -16,7 +17,7 @@ public class ParsingTests
     [Test]
     public void Opcode_Should_Pass()
     {
-        var tree = Parser.Parse<Chip8AssemblyParser>("call 42,5\ncls", "test.dsl");
+        var tree = maschine.Parse("call 42,5\ncls", "test.dsl");
         
         Assert.IsFalse(tree.Document.Messages.Count != 0);
 

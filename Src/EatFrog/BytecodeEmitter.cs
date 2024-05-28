@@ -5,7 +5,7 @@ using Syroot.BinaryData.Core;
 
 namespace EatFrog;
 
-public abstract class BytecodeEmitter<TEncoder, TValidator, TOpcode, TRegister, TAddressEncoder> : IDisposable
+public class BytecodeEmitter<TEncoder, TValidator, TOpcode, TRegister, TAddressEncoder>(Endian endian) : IDisposable
     where TEncoder : InstructionEncoder<TOpcode>, new()
     where TOpcode : struct
     where TRegister : struct
@@ -16,15 +16,17 @@ public abstract class BytecodeEmitter<TEncoder, TValidator, TOpcode, TRegister, 
     private readonly TAddressEncoder _addressEncoder = new();
     private readonly TValidator _validator = new();
     private readonly Dictionary<string, ulong> _labels = new();
+    private readonly Endian endian = endian;
     private BinaryStream _writer;
     private bool _isClosed = false;
 
-    public abstract ulong StackStartAddress { get; }
+    public ulong StackStartAddress { get; set; }
 
-    public BytecodeEmitter(Stream target, Endian endian)
-    {
-        _writer = new(target);
-        _writer.ByteConverter = endian == Endian.Little ? ByteConverter.Little : ByteConverter.Big;
+    public void SetTarget(Stream target) {
+        _writer = new(target)
+        {
+            ByteConverter = endian == Endian.Little ? ByteConverter.Little : ByteConverter.Big
+        };
     }
 
     /// <summary>

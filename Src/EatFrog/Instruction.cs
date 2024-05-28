@@ -16,6 +16,6 @@ public class Instruction<TOpcode>(TOpcode opcode)
 
     public override string ToString()
     {
-        return Opcode + " " + string.Join(',', Operands.Select(_=> _.ToString()));
+        return Opcode + (Operands.Any() ? " " : "") + string.Join(',', Operands.Select(_=> _.ToString()));
     }
 }

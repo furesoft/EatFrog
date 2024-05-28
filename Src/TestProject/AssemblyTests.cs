@@ -15,7 +15,7 @@ public class AssemblyTests
     public void Read_Should_Pass()
     {
         var assembly = new Chip8Assembly();
-        var testRom = File.OpenRead("test_opcode.ch8");
+        var testRom = File.OpenRead("test.ch8");
 
         assembly.Load(testRom);
     }

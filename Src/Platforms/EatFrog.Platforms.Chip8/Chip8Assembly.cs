@@ -2,7 +2,7 @@ using Syroot.BinaryData;
 
 namespace EatFrog.Platforms.Chip8;
 
-public class Chip8Assembly : Assembly<Chip8Opcode, Chip8Register, Chip8InstructionDecoder, Chip8InstructionEncoder>
+public class Chip8Assembly : Assembly<Chip8Maschine>
 {
     public List<Instruction<Chip8Opcode>> Instructions { get; set; } = [];
 
@@ -10,8 +10,9 @@ public class Chip8Assembly : Assembly<Chip8Opcode, Chip8Register, Chip8Instructi
     {
         var reader = new BinaryStream(strm, ByteConverter.Big);
 
-        while(reader.Position < strm.Length) {
-            var instruction = instructionDecoder.Decode(reader);
+        while (reader.Position < strm.Length)
+        {
+            var instruction = maschine.InstructionDecoder.Decode(reader);
 
             Instructions.Add(instruction);
         }
@@ -21,9 +22,10 @@ public class Chip8Assembly : Assembly<Chip8Opcode, Chip8Register, Chip8Instructi
 
     public override void Save(Stream strm)
     {
-        var emitter = new Chip8Emitter(strm);
+        var emitter = maschine.NewEmitter(strm);
 
-        foreach (var instruction in Instructions) {
+        foreach (var instruction in Instructions)
+        {
             emitter.Emit(instruction);
         }
 
