@@ -1,4 +1,4 @@
-﻿using EatFrog.Operands;
+using EatFrog.Operands;
 
 namespace EatFrog;
 
@@ -16,6 +16,6 @@ public class Instruction<TOpcode>(TOpcode opcode)
 
     public override string ToString()
     {
-        return Opcode + (Operands.Any() ? " " : "") + string.Join(',', Operands.Select(_=> _.ToString()));
+        return Opcode + (Operands.Length != 0 ? " " : "") + string.Join(',', Operands.Select(_=> _.ToString()));
     }
 }

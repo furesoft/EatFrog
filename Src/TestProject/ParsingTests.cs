@@ -11,7 +11,6 @@ public class ParsingTests
     [SetUp]
     public void Setup()
     {
-        
     }
 
     [Test]

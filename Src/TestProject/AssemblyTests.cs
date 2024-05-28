@@ -8,7 +8,6 @@ public class AssemblyTests
     [SetUp]
     public void Setup()
     {
-        
     }
 
     [Test]

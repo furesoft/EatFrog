@@ -1,10 +1,10 @@
-﻿namespace EatFrog.Validation;
+namespace EatFrog.Validation;
 
 public class ValidationResult
 {
     public List<string> Errors { get; } = new();
 
-    public bool IsSuccess => !Errors.Any();
+    public bool IsSuccess => Errors.Count == 0;
     
     public static implicit operator ValidationResult(bool value)
     {
