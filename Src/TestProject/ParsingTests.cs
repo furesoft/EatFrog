@@ -37,7 +37,7 @@ public class ParsingTests
 
             if (block.Children[1] is InstructionNode<Chip8Opcode> clsNode)
             {
-                Assert.IsTrue(clsNode.Operands.Count == 2);
+                Assert.IsTrue(clsNode.Operands.Count == 0);
 
                 Assert.IsTrue(clsNode.Opcode == Chip8Opcode.CLS);
             }
@@ -46,5 +46,7 @@ public class ParsingTests
                 Assert.Fail();
             }
         }
+
+        Assert.Fail("The root has to be of type BlockNode");
     }
 }

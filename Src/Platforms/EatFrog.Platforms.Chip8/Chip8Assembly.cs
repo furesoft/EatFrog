@@ -2,7 +2,7 @@ using Syroot.BinaryData;
 
 namespace EatFrog.Platforms.Chip8;
 
-public class Chip8Assembly : Assembly<Chip8Opcode, Chip8InstructionDecoder, Chip8InstructionEncoder>
+public class Chip8Assembly : Assembly<Chip8Opcode, Chip8Register, Chip8InstructionDecoder, Chip8InstructionEncoder>
 {
     public List<Instruction<Chip8Opcode>> Instructions { get; set; } = [];
 

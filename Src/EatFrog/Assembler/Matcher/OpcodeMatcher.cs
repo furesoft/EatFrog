@@ -1,38 +1,9 @@
-﻿using Furesoft.PrattParser;
-using Furesoft.PrattParser.Lexing;
+﻿namespace EatFrog.Assembler.Core.Matcher;
 
-namespace EatFrog.Assembler.Core.Matcher;
-
-internal class OpcodeMatcher<T> : ILexerMatcher
+internal class OpcodeMatcher<T> : EnumMatcher<T>
     where T : struct
 {
-    public bool Match(Lexer lexer, char c)
+    public OpcodeMatcher() : base("#opcode")
     {
-        foreach (var name in Enum.GetNames(typeof(T)))
-        {
-            if (lexer.IsMatch(name.ToLower()))
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
-    
-    public Token Build(Lexer lexer, ref int index, ref int column, ref int line)
-    {
-        var oldColumn = column;
-        var oldIndex = index;
-        
-        foreach (var name in Enum.GetNames(typeof(T)))
-        {
-            if (lexer.IsMatch(name.ToLower()))
-            {
-               lexer.Advance(name.Length);
-               break;
-            }
-        }
-        
-        return new("#opcode", lexer.Document.Source.Slice(oldIndex, index - oldIndex), line, oldColumn);
     }
 }
