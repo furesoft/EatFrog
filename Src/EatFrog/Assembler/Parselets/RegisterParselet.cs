@@ -5,10 +5,10 @@ using Furesoft.PrattParser.Parselets;
 
 namespace EatFrog.Assembler.Core.Parselets;
 
-internal class RegisterParselet<TRegister> : IPrefixParselet<AstNode>
+internal class RegisterParselet<TRegister> : IPrefixParselet
     where TRegister : struct
 {
-    public AstNode Parse(Parser<AstNode> parser, Token token)
+    public AstNode Parse(Parser parser, Token token)
     {
         var register = Enum.Parse<TRegister>(token.ToString(), true);
 

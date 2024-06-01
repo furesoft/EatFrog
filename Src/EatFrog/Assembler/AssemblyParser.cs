@@ -5,12 +5,14 @@ using Furesoft.PrattParser.Nodes;
 
 namespace EatFrog.Assembler.Core;
 
-public class AssemblyParser<TOpcode, TRegister> : Parser<AstNode>
+public class AssemblyParser<TOpcode, TRegister> : Parser
     where TOpcode : struct
     where TRegister : struct
 {
     public AssemblyParser()
     {
+        Block(PredefinedSymbols.EOL, PredefinedSymbols.EOF, 5000);
+        
         Register("#opcode", new InstructionParselet<TOpcode>());
         Register("#register", new RegisterParselet<TRegister>());
         
@@ -18,7 +20,6 @@ public class AssemblyParser<TOpcode, TRegister> : Parser<AstNode>
         this.AddArithmeticOperators();
         
         Group("[", "]");
-        Block(PredefinedSymbols.EOL, PredefinedSymbols.EOF);
         
         //Register(PredefinedSymbols.Name, new LabelParselet());
     }

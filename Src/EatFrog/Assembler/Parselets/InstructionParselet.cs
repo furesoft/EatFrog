@@ -5,10 +5,10 @@ using Furesoft.PrattParser.Parselets;
 
 namespace EatFrog.Assembler.Core.Parselets;
 
-internal class InstructionParselet<TOpcode> : IPrefixParselet<AstNode>
+internal class InstructionParselet<TOpcode> : IPrefixParselet
     where TOpcode : struct
 {
-    public AstNode Parse(Parser<AstNode> parser, Token token)
+    public AstNode Parse(Parser parser, Token token)
     {
         var opcode = Enum.Parse<TOpcode>(token.ToString(), true);
         var operands = parser.ParseSeperated(PredefinedSymbols.Comma, PredefinedSymbols.EOL, PredefinedSymbols.EOF);
