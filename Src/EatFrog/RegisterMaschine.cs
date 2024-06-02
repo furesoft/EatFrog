@@ -21,7 +21,7 @@ public abstract class RegisterMaschine<TOpCode, TRegister, TInstructionDecoder, 
 
     public TranslationUnit Parse(string src, string filename = "test.dsl")
     {
-        return Parser.Parse<Assembler.Core.AssemblyParser<TOpCode, TRegister>>(src, filename);
+        return Parser.Parse<Assembler.Core.AssemblyParser<TOpCode, TRegister>>(src, filename, useToplevelStatements: true);
     }
 
     public BytecodeEmitter<TInstructionEncoder, TInstructionValidator, TOpCode, TRegister, TAddressEncoder> NewEmitter(Stream strm)

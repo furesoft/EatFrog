@@ -11,7 +11,7 @@ public class AssemblyParser<TOpcode, TRegister> : Parser
 {
     public AssemblyParser()
     {
-        Block(PredefinedSymbols.EOL, PredefinedSymbols.EOF, 5000);
+        Block(PredefinedSymbols.SOF, PredefinedSymbols.EOF, PredefinedSymbols.EOL);
         
         Register("#opcode", new InstructionParselet<TOpcode>());
         Register("#register", new RegisterParselet<TRegister>());

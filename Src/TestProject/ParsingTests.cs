@@ -16,7 +16,7 @@ public class ParsingTests
     [Test]
     public void Opcode_Should_Pass()
     {
-        var tree = maschine.Parse("call 42,5\ncls", "test.dsl");
+        var tree = maschine.Parse("call 42,4\ncls", "test.dsl");
         
         Assert.IsFalse(tree.Document.Messages.Count != 0);
 
