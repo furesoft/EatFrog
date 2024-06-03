@@ -4,7 +4,7 @@ namespace TestProject;
 
 public class ParsingTests : SnapshotTestBase
 {
-    Chip8Maschine maschine = new();
+    readonly Chip8Maschine maschine = new();
 
     [Test]
     public Task Block_Multiple_Children_Should_Pass()

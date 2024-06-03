@@ -1,7 +1,6 @@
 ﻿using EatFrog;
 using EatFrog.Operands;
 using EatFrog.Platforms.Chip8;
-using EatFrog.Platforms.X86;
 
 namespace TestProject;
 
