@@ -11,7 +11,7 @@ internal class InstructionParselet<TOpcode> : IPrefixParselet
     public AstNode Parse(Parser parser, Token token)
     {
         var opcode = Enum.Parse<TOpcode>(token.ToString(), true);
-        var operands = parser.ParseSeperated(PredefinedSymbols.Comma, PredefinedSymbols.EOL, PredefinedSymbols.EOF);
+        var operands = parser.ParseSeperated(PredefinedSymbols.Comma, bindingPower: 0, PredefinedSymbols.EOL, PredefinedSymbols.EOF);
 
         return new InstructionNode<TOpcode>(opcode, operands).WithRange(token, parser.LookAhead(0));
     }
