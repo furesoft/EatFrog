@@ -1,37 +1,38 @@
 ﻿using EatFrog;
 using EatFrog.Operands;
+using EatFrog.Platforms.Chip8;
 using EatFrog.Platforms.X86;
 
 namespace TestProject;
 
-public class ValidatorTest
+public class Chip8ValidatorTest
 {
-    private readonly X86InstructionValidator _validator = new();
+    private readonly Chip8InstructionValidator _validator = new();
 
     [Test]
-    public void NoOperand_Should_Pass()
+    public Task NoOperand_Should_Pass()
     {
-        var instruction = new Instruction<X86Opcode>(X86Opcode.RET);
+        var instruction = new Instruction<Chip8Opcode>(Chip8Opcode.RET);
         var validationResult = _validator.Validate(instruction);
-        
-        Assert.IsTrue(validationResult.IsSuccess);
+
+        return Verify(validationResult);
     }
     
     [Test]
-    public void OperandType_Should_Pass()
+    public Task OperandType_Should_Pass()
     {
-        var instruction = new Instruction<X86Opcode>(X86Opcode.CALL, new Offset(0xC00FFEE));
+        var instruction = new Instruction<Chip8Opcode>(Chip8Opcode.CALL, new Address(0xC00FFEE));
         var validationResult = _validator.Validate(instruction);
-        
-        Assert.IsTrue(validationResult.IsSuccess);
+
+        return Verify(validationResult);
     }
     
     [Test]
-    public void OperandNotType_Should_Pass()
+    public Task OperandNotType_Should_Pass()
     {
-        var instruction = new Instruction<X86Opcode>(X86Opcode.CALL, new Value(0xC00FFEE));
+        var instruction = new Instruction<Chip8Opcode>(Chip8Opcode.CLS);
         var validationResult = _validator.Validate(instruction);
         
-        Assert.IsTrue(!validationResult.IsSuccess);
+        return Verify(validationResult);
     }
 }
