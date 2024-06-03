@@ -5,7 +5,7 @@ using EatFrog.Platforms.X86;
 
 namespace TestProject;
 
-public class Chip8ValidatorTest
+public class Chip8ValidatorTest : SnapshotTestBase
 {
     private readonly Chip8InstructionValidator _validator = new();
 
@@ -15,7 +15,7 @@ public class Chip8ValidatorTest
         var instruction = new Instruction<Chip8Opcode>(Chip8Opcode.RET);
         var validationResult = _validator.Validate(instruction);
 
-        return Verify(validationResult);
+        return Verify(validationResult, settings);
     }
     
     [Test]
@@ -24,7 +24,7 @@ public class Chip8ValidatorTest
         var instruction = new Instruction<Chip8Opcode>(Chip8Opcode.CALL, new Address(0xC00FFEE));
         var validationResult = _validator.Validate(instruction);
 
-        return Verify(validationResult);
+        return Verify(validationResult, settings);
     }
     
     [Test]
@@ -33,6 +33,6 @@ public class Chip8ValidatorTest
         var instruction = new Instruction<Chip8Opcode>(Chip8Opcode.CLS);
         var validationResult = _validator.Validate(instruction);
         
-        return Verify(validationResult);
+        return Verify(validationResult, settings);
     }
 }

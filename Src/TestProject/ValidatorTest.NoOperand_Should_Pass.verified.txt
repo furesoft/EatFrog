@@ -1,4 +1,0 @@
-﻿{
-  $type: ValidationResult,
-  IsSuccess: true
-}
