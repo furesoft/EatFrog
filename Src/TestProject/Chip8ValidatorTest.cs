@@ -1,11 +1,18 @@
-﻿using EatFrog;
+﻿using System.Runtime.CompilerServices;
+using EatFrog;
 using EatFrog.Operands;
 using EatFrog.Platforms.Chip8;
+using Furesoft.PrattParser.Testing;
 
 namespace TestProject;
 
-public class Chip8ValidatorTest : SnapshotTestBase
+public class Chip8ValidatorTest : SnapshotParserTestBase
 {
+    [ModuleInitializer]
+    public static void Initialize() {
+        Init();
+    }
+
     private readonly Chip8InstructionValidator _validator = new();
 
     [Test]
