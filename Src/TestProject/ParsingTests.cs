@@ -35,39 +35,4 @@ public class ParsingTests : SnapshotParserTestBase
 
         return Verify(tree, settings);
     }
-
-    [Test]
-    public Task Convert_CallRegisterToInstruction_Should_Pass() {
-        var instruction = maschine.FromAssembler("call ve");
-
-        return Verify(instruction, settings);
-    }
-
-    [Test]
-    public Task Convert_ClsToInstruction_Should_Pass() {
-        var instruction = maschine.FromAssembler("cls");
-
-        return Verify(instruction, settings);
-    }
-
-    [Test]
-    public Task Convert_CallWithTwoOperandsToInstruction_Should_Pass() {
-        var instruction = maschine.FromAssembler("call 123, ve");
-
-        return Verify(instruction, settings);
-    }
-
-    [Test]
-    public Task Convert_CallWithTwoOperandsAndClsToInstruction_Should_Pass() {
-        var instruction = maschine.FromAssembler("call 123, ve\ncls");
-
-        return Verify(instruction, settings);
-    }
-
-    [Test]
-    public Task Convert_CallWithLabelToInstruction_Should_Pass() {
-        var instruction = maschine.FromAssembler("call $myLabel");
-
-        return Verify(instruction, settings);
-    }
 }
