@@ -21,4 +21,18 @@ public class ParsingTests : SnapshotTestBase
 
         return Verify(tree, settings);
     }
+
+    [Test]
+    public Task CallRegister_Should_Pass() {
+        var tree = maschine.Parse("call ve");
+
+        return Verify(tree, settings);
+    }
+
+    [Test]
+    public Task Convert_CallRegisterToInstruction_Should_Pass() {
+        var instruction = maschine.FromAssembler("call ve");
+
+        return Verify(instruction, settings);
+    }
 }

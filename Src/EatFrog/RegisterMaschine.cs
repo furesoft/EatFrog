@@ -27,7 +27,7 @@ public abstract class RegisterMaschine<TOpCode, TRegister, TInstructionDecoder, 
     {
         var translationUnit = Parser.Parse<Assembler.Core.AssemblyParser<TOpCode, TRegister>>(src, filename, useToplevelStatements: true);
 
-        var instructionConversionVisiter = new InstructionConversionVisitor<TOpCode>();
+        var instructionConversionVisiter = new InstructionConversionVisitor<TOpCode, TRegister>();
 
         return translationUnit.Tree.Accept(instructionConversionVisiter);
     }
