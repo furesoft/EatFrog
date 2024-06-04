@@ -2,6 +2,7 @@ using EatFrog.Assembler.Core.Nodes;
 using EatFrog.Operands;
 using Furesoft.PrattParser;
 using Furesoft.PrattParser.Nodes;
+using Furesoft.PrattParser.Nodes.Operators;
 
 namespace EatFrog;
 
@@ -42,7 +43,9 @@ internal class InstructionConversionVisitor<TOpCode, TRegister> : IVisitor<IEnum
         {
             RegisterRefNode<TRegister> regRef => new RegisterRef<TRegister>(regRef.Register),
             LiteralNode<ulong> literal => new Value(literal.Value),
-            _ => throw new NotImplementedException()
+            PrefixOperatorNode labelRef 
+                when labelRef.Operator == PredefinedSymbols.Dollar && labelRef.Expr is NameAstNode name => new LabelRef(name.Name), 
+            _ => throw new InvalidOperationException($"Invalid Operand '{operand}'")
         };
     }
 }

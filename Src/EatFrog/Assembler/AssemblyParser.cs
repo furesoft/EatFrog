@@ -1,6 +1,7 @@
 ﻿using EatFrog.Assembler.Core.Matcher;
 using EatFrog.Assembler.Core.Parselets;
 using Furesoft.PrattParser;
+using Furesoft.PrattParser.Parselets;
 
 namespace EatFrog.Assembler.Core;
 
@@ -14,13 +15,15 @@ public class AssemblyParser<TOpcode, TRegister> : Parser
         
         Register("#opcode", new InstructionParselet<TOpcode>());
         Register("#register", new RegisterParselet<TRegister>());
-        
+
+        Register(PredefinedSymbols.Name, new NameParselet());
+
         this.AddCommonLiterals();
         this.AddArithmeticOperators();
+
+        Prefix("$", 100);
         
         Group("[", "]");
-        
-        //Register(PredefinedSymbols.Name, new LabelParselet());
     }
 
     protected override void InitLexer(Lexer lexer)

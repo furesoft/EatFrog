@@ -63,4 +63,11 @@ public class ParsingTests : SnapshotParserTestBase
 
         return Verify(instruction, settings);
     }
+
+    [Test]
+    public Task Convert_CallWithLabelToInstruction_Should_Pass() {
+        var instruction = maschine.FromAssembler("call $myLabel");
+
+        return Verify(instruction, settings);
+    }
 }
