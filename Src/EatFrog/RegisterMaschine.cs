@@ -1,6 +1,5 @@
 using EatFrog.Validation;
 using Furesoft.PrattParser;
-using Furesoft.PrattParser.Nodes;
 using Syroot.BinaryData.Core;
 
 namespace EatFrog;
@@ -22,6 +21,15 @@ public abstract class RegisterMaschine<TOpCode, TRegister, TInstructionDecoder, 
     public TranslationUnit Parse(string src, string filename = "test.dsl")
     {
         return Parser.Parse<Assembler.Core.AssemblyParser<TOpCode, TRegister>>(src, filename, useToplevelStatements: true);
+    }
+
+    public IEnumerable<Instruction<TOpCode>> FromAssembler(string src, string filename = "test.dsl")
+    {
+        var translationUnit = Parser.Parse<Assembler.Core.AssemblyParser<TOpCode, TRegister>>(src, filename, useToplevelStatements: true);
+
+        var instructionConversionVisiter = new InstructionConversionVisitor<TOpCode>();
+
+        return translationUnit.Tree.Accept(instructionConversionVisiter);
     }
 
     public BytecodeEmitter<TInstructionEncoder, TInstructionValidator, TOpCode, TRegister, TAddressEncoder> NewEmitter(Stream strm)
