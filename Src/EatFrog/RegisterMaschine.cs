@@ -20,12 +20,12 @@ public abstract class RegisterMaschine<TOpCode, TRegister, TInstructionDecoder, 
 
     public TranslationUnit Parse(string src, string filename = "test.dsl")
     {
-        return Parser.Parse<Assembler.Core.AssemblyParser<TOpCode, TRegister>>(src, filename, useToplevelStatements: true);
+        return Parser.Parse<Assembler.Core.AssemblyParser<TOpCode, TRegister>>(src, filename, useStatementsAtToplevel: true);
     }
 
     public IEnumerable<Instruction<TOpCode>> FromAssembler(string src, string filename = "test.dsl")
     {
-        var translationUnit = Parser.Parse<Assembler.Core.AssemblyParser<TOpCode, TRegister>>(src, filename, useToplevelStatements: true);
+        var translationUnit = Parser.Parse<Assembler.Core.AssemblyParser<TOpCode, TRegister>>(src, filename, useStatementsAtToplevel: true);
 
         var instructionConversionVisiter = new InstructionConversionVisitor<TOpCode, TRegister>();
 

@@ -3,7 +3,7 @@ using Furesoft.PrattParser.Lexing;
 
 namespace EatFrog.Assembler.Core.Matcher;
 
-internal class EnumMatcher<T>(string symbol) : ILexerMatcher
+internal class EnumMatcher<T>(string symbol) : IMatcher
     where T : struct
 {
     public bool Match(Lexer lexer, char c)

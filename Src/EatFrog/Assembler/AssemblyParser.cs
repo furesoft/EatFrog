@@ -9,7 +9,7 @@ public class AssemblyParser<TOpcode, TRegister> : Parser
     where TOpcode : struct
     where TRegister : struct
 {
-    protected override void Init()
+    protected override void InitParselets()
     {
         Block(PredefinedSymbols.SOF, PredefinedSymbols.EOF, PredefinedSymbols.EOL);
         

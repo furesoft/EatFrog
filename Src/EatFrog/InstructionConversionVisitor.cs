@@ -44,7 +44,7 @@ internal class InstructionConversionVisitor<TOpCode, TRegister> : IVisitor<IEnum
             RegisterRefNode<TRegister> regRef => new RegisterRef<TRegister>(regRef.Register),
             LiteralNode<ulong> literal => new Value(literal.Value),
             PrefixOperatorNode labelRef 
-                when labelRef.Operator == PredefinedSymbols.Dollar && labelRef.Expr is NameAstNode name => new LabelRef(name.Name), 
+                when labelRef.Operator == PredefinedSymbols.Dollar && labelRef.Expr is NameNode name => new LabelRef(name.Name), 
             _ => throw new InvalidOperationException($"Invalid Operand '{operand}'")
         };
     }
