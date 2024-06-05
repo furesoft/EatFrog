@@ -33,6 +33,6 @@ internal class EnumMatcher<T>(string symbol) : IMatcher
             }
         }
 
-        return new(symbol, lexer.Document.Source.Slice(oldIndex, index - oldIndex), line, oldColumn);
+        return new(symbol, lexer.Document.Source[oldIndex..index], line, oldColumn);
     }
 }

@@ -25,8 +25,8 @@ public class AssemblyTests
         var assembly = new Chip8Assembly();
         var testRom = File.OpenWrite("test.ch8");
 
-        assembly.Instructions.Add(new Instruction<Chip8Opcode>(Chip8Opcode.RET));
-        assembly.Instructions.Add(new Instruction<Chip8Opcode>(Chip8Opcode.CLS));
+        assembly.Instructions.Add(new Instruction<Chip8OpCode>(Chip8OpCode.RET));
+        assembly.Instructions.Add(new Instruction<Chip8OpCode>(Chip8OpCode.CLS));
 
         assembly.Save(testRom);
     }

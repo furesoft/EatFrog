@@ -9,7 +9,8 @@ namespace TestProject;
 public class Chip8ValidatorTest : SnapshotParserTestBase
 {
     [ModuleInitializer]
-    public static void Initialize() {
+    public static void Initialize()
+    {
         Init();
     }
 
@@ -18,27 +19,27 @@ public class Chip8ValidatorTest : SnapshotParserTestBase
     [Test]
     public Task NoOperand_Should_Pass()
     {
-        var instruction = new Instruction<Chip8Opcode>(Chip8Opcode.RET);
+        var instruction = new Instruction<Chip8OpCode>(Chip8OpCode.RET);
         var validationResult = _validator.Validate(instruction);
 
         return Verify(validationResult, settings);
     }
-    
+
     [Test]
     public Task OperandType_Should_Pass()
     {
-        var instruction = new Instruction<Chip8Opcode>(Chip8Opcode.CALL, new Address(0xC00FFEE));
+        var instruction = new Instruction<Chip8OpCode>(Chip8OpCode.CALL, new Address(0xC00FFEE));
         var validationResult = _validator.Validate(instruction);
 
         return Verify(validationResult, settings);
     }
-    
+
     [Test]
     public Task OperandNotType_Should_Pass()
     {
-        var instruction = new Instruction<Chip8Opcode>(Chip8Opcode.CLS);
+        var instruction = new Instruction<Chip8OpCode>(Chip8OpCode.CLS);
         var validationResult = _validator.Validate(instruction);
-        
+
         return Verify(validationResult, settings);
     }
 }

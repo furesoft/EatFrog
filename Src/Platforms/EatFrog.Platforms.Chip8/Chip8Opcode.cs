@@ -1,6 +1,6 @@
 ﻿namespace EatFrog.Platforms.Chip8;
 
-public enum Chip8Opcode
+public enum Chip8OpCode
 {
     // 0x0NNN - Calls RCA 1802 program at address NNN (not implemented in most CHIP-8 interpreters)
     SYS = 0x0000,

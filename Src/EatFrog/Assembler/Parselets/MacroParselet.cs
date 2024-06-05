@@ -1,18 +1,17 @@
-﻿using EatFrog.Assembler.Nodes;
+using EatFrog.Assembler.Nodes;
 using Furesoft.PrattParser;
 using Furesoft.PrattParser.Nodes;
 using Furesoft.PrattParser.Parselets;
 
 namespace EatFrog.Assembler.Core.Parselets;
 
-internal class InstructionParselet<TOpCode> : IPrefixParselet
+internal class MacroParselet<TOpCode, TRegister> : IPrefixParselet
     where TOpCode : struct
 {
     public AstNode Parse(Parser parser, Token token)
     {
-        var opcode = Enum.Parse<TOpCode>(token.ToString(), true);
         var operands = parser.ParseSeperated(PredefinedSymbols.Comma, bindingPower: 0, PredefinedSymbols.EOL, PredefinedSymbols.EOF);
 
-        return new InstructionNode<TOpCode>(opcode, operands).WithRange(token, parser.LookAhead(0));
+        return new MacroNode(token.Text.ToString(), operands).WithRange(token, parser.LookAhead(0));
     }
 }

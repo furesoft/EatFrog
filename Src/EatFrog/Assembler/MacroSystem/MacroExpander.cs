@@ -3,19 +3,16 @@ using EatFrog.Operands;
 
 namespace EatFrog.Assembler.MacroSystem;
 
-public class MacroExpander<TOpCode, TRegister>
+public class MacroExpander<TOpCode, TRegister, TMacroStorage>
     where TOpCode : struct
     where TRegister : struct
+    where TMacroStorage : MacroStorage<TOpCode, TRegister>, new()
 {
-    private readonly Dictionary<string, MacroDefinition<TOpCode, TRegister>> _macroDefs = [];
-
-    public void AddMacro(MacroDefinition<TOpCode, TRegister> definition) {
-        _macroDefs.Add(definition.Name, definition);
-    }
+    public readonly TMacroStorage Storage = new();
 
     public Instruction<TOpCode>[] ExpandMacro(MacroNode invocation)
     {
-        var macroDef = _macroDefs[invocation.Mnemnonic.Name] ?? throw new MacroNotFoundException(invocation.Mnemnonic.Name);
+        var macroDef = Storage.Macros[invocation.Mnemnonic.Name] ?? throw new MacroNotFoundException(invocation.Mnemnonic.Name);
 
         var args = ExtractArguments(invocation);
         var expandedInstructions = macroDef.Expand(args);
@@ -28,7 +25,7 @@ public class MacroExpander<TOpCode, TRegister>
         var operands = new List<Operand>();
 
         foreach(var operand in invocation.Arguments) {
-            operands.Add(InstructionConversionVisitor<TOpCode, int>.VisitOperand(operand));
+            operands.Add(InstructionConversionVisitor<TOpCode, TRegister, TMacroStorage>.VisitOperand(operand));
         }
 
         return [.. operands];

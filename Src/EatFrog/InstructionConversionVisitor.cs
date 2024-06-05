@@ -8,11 +8,11 @@ using Furesoft.PrattParser.Nodes.Operators;
 
 namespace EatFrog;
 
-internal class InstructionConversionVisitor<TOpCode, TRegister> : IVisitor<IEnumerable<Instruction<TOpCode>>>
+internal class InstructionConversionVisitor<TOpCode, TRegister, TMacroStorage>(MacroExpander<TOpCode, TRegister, TMacroStorage> expander) : IVisitor<IEnumerable<Instruction<TOpCode>>>
     where TOpCode : struct
     where TRegister : struct
+    where TMacroStorage : MacroStorage<TOpCode, TRegister>, new()
 {
-    public readonly MacroExpander<TOpCode, TRegister> Expander = new();
 
     public IEnumerable<Instruction<TOpCode>> Visit(AstNode node)
     {
@@ -26,7 +26,7 @@ internal class InstructionConversionVisitor<TOpCode, TRegister> : IVisitor<IEnum
                     instructions.Add(VisitInstruction(instr));
                 }
                 else if (child is MacroNode macro) {
-                    instructions.AddRange(Expander.ExpandMacro(macro));
+                    instructions.AddRange(expander.ExpandMacro(macro));
                 }
             }
         }
