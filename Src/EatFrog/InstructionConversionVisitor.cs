@@ -1,4 +1,5 @@
 using EatFrog.Assembler.Core.Nodes;
+using EatFrog.Assembler.MacroSystem;
 using EatFrog.Assembler.Nodes;
 using EatFrog.Operands;
 using Furesoft.PrattParser;
@@ -11,19 +12,26 @@ internal class InstructionConversionVisitor<TOpCode, TRegister> : IVisitor<IEnum
     where TOpCode : struct
     where TRegister : struct
 {
+    public readonly MacroExpander<TOpCode, TRegister> Expander = new();
+
     public IEnumerable<Instruction<TOpCode>> Visit(AstNode node)
     {
-        var result = new List<Instruction<TOpCode>>();
+        var instructions = new List<Instruction<TOpCode>>();
 
         if (node is BlockNode block)
         {
-            foreach (InstructionNode<TOpCode> child in block.Children)
+            foreach (var child in block.Children)
             {
-                result.Add(VisitInstruction(child));
+                if (child is InstructionNode<TOpCode> instr) {
+                    instructions.Add(VisitInstruction(instr));
+                }
+                else if (child is MacroNode macro) {
+                    instructions.AddRange(Expander.ExpandMacro(macro));
+                }
             }
         }
 
-        return result;
+        return instructions;
     }
 
     private Instruction<TOpCode> VisitInstruction(InstructionNode<TOpCode> node)
@@ -41,7 +49,7 @@ internal class InstructionConversionVisitor<TOpCode, TRegister> : IVisitor<IEnum
         return instr;
     }
 
-    private Operand VisitOperand(AstNode operand)
+    public static Operand VisitOperand(AstNode operand)
     {
         return operand switch
         {

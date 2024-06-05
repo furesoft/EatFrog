@@ -32,7 +32,6 @@ public class AssemblyParser<TOpcode, TRegister> : Parser
 
         lexer.AddMatcher(new OpcodeMatcher<TOpcode>());
         lexer.AddMatcher(new RegisterMatcher<TRegister>());
-        lexer.AddMatcher(new MacroMatcher([.. MacroExpander.Macros.Keys]));
 
         lexer.Ignore(' ');
     }
