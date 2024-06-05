@@ -1,6 +1,6 @@
 ﻿using Furesoft.PrattParser.Nodes;
 
-namespace EatFrog.Assembler.Core.Nodes;
+namespace EatFrog.Assembler.Nodes;
 
 public class InstructionNode<TOpCode>(TOpCode opcode, List<AstNode> operands) : AstNode
     where TOpCode : struct

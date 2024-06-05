@@ -1,4 +1,4 @@
-﻿using EatFrog.Assembler.Core.Nodes;
+﻿using EatFrog.Assembler.Nodes;
 using Furesoft.PrattParser;
 using Furesoft.PrattParser.Nodes;
 using Furesoft.PrattParser.Parselets;
