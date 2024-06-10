@@ -12,7 +12,7 @@ public class AssemblerToInstructionsTests : SnapshotParserTestBase {
         Init();
     }
 
-        [Test]
+    [Test]
     public Task Convert_CallRegisterToInstruction_Should_Pass() {
         var instruction = maschine.FromAssembler("call ve");
 
@@ -43,6 +43,14 @@ public class AssemblerToInstructionsTests : SnapshotParserTestBase {
     [Test]
     public Task Convert_CallWithLabelToInstruction_Should_Pass() {
         var instruction = maschine.FromAssembler("call $myLabel");
+
+        return Verify(instruction, settings);
+    }
+
+    [Test]
+    public Task Macro_Add_Should_Pass()
+    {
+        var instruction = maschine.FromAssembler("add I, V0");
 
         return Verify(instruction, settings);
     }
