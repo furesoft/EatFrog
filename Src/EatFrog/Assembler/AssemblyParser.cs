@@ -26,7 +26,7 @@ public class AssemblyParser<TOpCode, TRegister, TMacroStorage> : Parser
         this.AddCommonLiterals();
         this.AddArithmeticOperators();
 
-        Prefix("$", 100);
+        Prefix("$");
         
         Group("[", "]");
     }
