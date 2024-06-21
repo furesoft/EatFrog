@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
+        <Version>1.0.1</Version>
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>disable</Nullable>
@@ -13,7 +14,7 @@
 
     <ItemGroup>
       <PackageReference Include="Syroot.BinaryData" Version="5.2.2" />
-      <PackageReference Include="Furesoft.PrattParser" Version="1.0.45" />
+      <PackageReference Include="Furesoft.PrattParser" Version="1.0.59" />
     </ItemGroup>
 
 </Project>

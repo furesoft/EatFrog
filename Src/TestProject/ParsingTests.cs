@@ -1,52 +1,38 @@
-using EatFrog.Assembler.Core.Nodes;
+using System.Runtime.CompilerServices;
 using EatFrog.Platforms.Chip8;
-using Furesoft.PrattParser;
-using Furesoft.PrattParser.Nodes;
+using Furesoft.PrattParser.Testing;
 
 namespace TestProject;
 
-public class ParsingTests
+public class ParsingTests : SnapshotParserTestBase
 {
-    Chip8Maschine maschine = new();
-    [SetUp]
-    public void Setup()
-    {
+    readonly Chip8Maschine maschine = new();
+
+    [ModuleInitializer]
+    public static void Initialize() {
+        Init();
     }
 
     [Test]
-    public void Opcode_Should_Pass()
+    public Task Block_Multiple_Children_Should_Pass()
     {
         var tree = maschine.Parse("call 42,5\ncls", "test.dsl");
-        
-        Assert.IsFalse(tree.Document.Messages.Count != 0);
 
-        if(tree.Tree is BlockNode block) {
-            if (block.Children[0] is InstructionNode<Chip8Opcode> callNode)
-            {
-                Assert.IsTrue(callNode.Operands.Count == 2);
+        return Verify(tree, settings);
+    }
 
-                Assert.IsTrue(callNode.Opcode == Chip8Opcode.CALL);
+    [Test]
+    public Task Block_Single_Children_Should_Pass()
+    {
+        var tree = maschine.Parse("call 42,5", "test.dsl");
 
-                Assert.IsTrue(callNode.Operands[0] is LiteralNode<ulong> v && v.Value == 42);
-                Assert.IsTrue(callNode.Operands[1] is LiteralNode<ulong> v2 && v2.Value == 5);
-            }
-            else
-            {
-                Assert.Fail();
-            }
+        return Verify(tree, settings);
+    }
 
-            if (block.Children[1] is InstructionNode<Chip8Opcode> clsNode)
-            {
-                Assert.IsTrue(clsNode.Operands.Count == 0);
+    [Test]
+    public Task CallRegister_Should_Pass() {
+        var tree = maschine.Parse("call ve");
 
-                Assert.IsTrue(clsNode.Opcode == Chip8Opcode.CLS);
-            }
-            else
-            {
-                Assert.Fail();
-            }
-        }
-
-        Assert.Fail("The root has to be of type BlockNode");
+        return Verify(tree, settings);
     }
 }

@@ -1,6 +1,5 @@
-﻿namespace EatFrog.Platforms.X86;
-
-using System;
+﻿
+using EatFrog;
 
 public class X86AddressEncoder : IAddressEncoder
 {

@@ -1,34 +1,48 @@
-﻿using EatFrog.Assembler.Core.Matcher;
-using EatFrog.Assembler.Core.Parselets;
+﻿using EatFrog.Assembler.Matcher;
+using EatFrog.Assembler.Parselets;
+using EatFrog.Assembler.MacroSystem;
 using Furesoft.PrattParser;
-using Furesoft.PrattParser.Nodes;
+using Furesoft.PrattParser.Lexing.IgnoreMatcher.Comments;
+using Furesoft.PrattParser.Parselets;
+using static Furesoft.PrattParser.PredefinedSymbols;
 
 namespace EatFrog.Assembler.Core;
 
-public class AssemblyParser<TOpcode, TRegister> : Parser<AstNode>
-    where TOpcode : struct
+public class AssemblyParser<TOpCode, TRegister, TMacroStorage> : Parser
+    where TOpCode : struct
     where TRegister : struct
+    where TMacroStorage : MacroStorage<TOpCode, TRegister>, new()
 {
-    public AssemblyParser()
+    public static MacroExpander<TOpCode, TRegister, TMacroStorage> MacroExpander = new();
+
+    protected override void InitParselets()
     {
-        Register("#opcode", new InstructionParselet<TOpcode>());
-        Register("#register", new RegisterParselet<TRegister>());
+        Block(SOF, EOF, EOL);
         
+        Register("#opcode", new InstructionParselet<TOpCode>());
+        Register("#register", new RegisterParselet<TRegister>());
+        Register("#macro", new MacroParselet<TOpCode, TRegister>());
+
+        Register(Name, new NameParselet());
+
         this.AddCommonLiterals();
         this.AddArithmeticOperators();
+
+        Prefix("$");
         
         Group("[", "]");
-        Block(PredefinedSymbols.EOL, PredefinedSymbols.EOF);
-        
-        //Register(PredefinedSymbols.Name, new LabelParselet());
     }
-    
+
     protected override void InitLexer(Lexer lexer)
     {
-        lexer.MatchNumber(true, true);
+        lexer.MatchNumber(allowHex: true, allowBin: true);
 
-        lexer.AddMatcher(new OpcodeMatcher<TOpcode>());
+        lexer.AddMatcher(new OpcodeMatcher<TOpCode>());
         lexer.AddMatcher(new RegisterMatcher<TRegister>());
+        lexer.AddMatcher(new MacroMatcher<TOpCode, TRegister, TMacroStorage>(MacroExpander));
+
+        lexer.Ignore(new SingleLineCommentIgnoreMatcher("#"));
+        lexer.Ignore(new MultiLineCommentIgnoreMatcher(SlashAsterisk, AsteriskSlash));
 
         lexer.Ignore(' ');
     }

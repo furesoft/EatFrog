@@ -4,7 +4,7 @@ namespace EatFrog.Platforms.Chip8;
 
 public class Chip8Assembly : Assembly<Chip8Maschine>
 {
-    public List<Instruction<Chip8Opcode>> Instructions { get; set; } = [];
+    public List<Instruction<Chip8OpCode>> Instructions { get; set; } = [];
 
     public override Chip8Assembly Load(Stream strm)
     {
