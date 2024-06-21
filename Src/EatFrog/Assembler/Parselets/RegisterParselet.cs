@@ -1,9 +1,9 @@
-using EatFrog.Assembler.Core.Nodes;
+using EatFrog.Assembler.Nodes;
 using Furesoft.PrattParser;
 using Furesoft.PrattParser.Nodes;
 using Furesoft.PrattParser.Parselets;
 
-namespace EatFrog.Assembler.Core.Parselets;
+namespace EatFrog.Assembler.Parselets;
 
 internal class RegisterParselet<TRegister> : IPrefixParselet
     where TRegister : struct

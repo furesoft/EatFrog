@@ -14,7 +14,7 @@
 
     <ItemGroup>
       <PackageReference Include="Syroot.BinaryData" Version="5.2.2" />
-      <PackageReference Include="Furesoft.PrattParser" Version="1.0.58" />
+      <PackageReference Include="Furesoft.PrattParser" Version="1.0.59" />
     </ItemGroup>
 
 </Project>

@@ -3,7 +3,7 @@ using Furesoft.PrattParser;
 using Furesoft.PrattParser.Nodes;
 using Furesoft.PrattParser.Parselets;
 
-namespace EatFrog.Assembler.Core.Parselets;
+namespace EatFrog.Assembler.Parselets;
 
 internal class InstructionParselet<TOpCode> : IPrefixParselet
     where TOpCode : struct

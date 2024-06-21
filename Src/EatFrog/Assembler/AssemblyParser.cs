@@ -1,8 +1,10 @@
-﻿using EatFrog.Assembler.Core.Matcher;
-using EatFrog.Assembler.Core.Parselets;
+﻿using EatFrog.Assembler.Matcher;
+using EatFrog.Assembler.Parselets;
 using EatFrog.Assembler.MacroSystem;
 using Furesoft.PrattParser;
+using Furesoft.PrattParser.Lexing.IgnoreMatcher.Comments;
 using Furesoft.PrattParser.Parselets;
+using static Furesoft.PrattParser.PredefinedSymbols;
 
 namespace EatFrog.Assembler.Core;
 
@@ -15,13 +17,13 @@ public class AssemblyParser<TOpCode, TRegister, TMacroStorage> : Parser
 
     protected override void InitParselets()
     {
-        Block(PredefinedSymbols.SOF, PredefinedSymbols.EOF, PredefinedSymbols.EOL);
+        Block(SOF, EOF, EOL);
         
         Register("#opcode", new InstructionParselet<TOpCode>());
         Register("#register", new RegisterParselet<TRegister>());
         Register("#macro", new MacroParselet<TOpCode, TRegister>());
 
-        Register(PredefinedSymbols.Name, new NameParselet());
+        Register(Name, new NameParselet());
 
         this.AddCommonLiterals();
         this.AddArithmeticOperators();
@@ -33,11 +35,14 @@ public class AssemblyParser<TOpCode, TRegister, TMacroStorage> : Parser
 
     protected override void InitLexer(Lexer lexer)
     {
-        lexer.MatchNumber(true, true);
+        lexer.MatchNumber(allowHex: true, allowBin: true);
 
         lexer.AddMatcher(new OpcodeMatcher<TOpCode>());
         lexer.AddMatcher(new RegisterMatcher<TRegister>());
         lexer.AddMatcher(new MacroMatcher<TOpCode, TRegister, TMacroStorage>(MacroExpander));
+
+        lexer.Ignore(new SingleLineCommentIgnoreMatcher("#"));
+        lexer.Ignore(new MultiLineCommentIgnoreMatcher(SlashAsterisk, AsteriskSlash));
 
         lexer.Ignore(' ');
     }

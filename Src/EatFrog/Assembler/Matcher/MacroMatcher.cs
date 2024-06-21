@@ -2,7 +2,7 @@ using EatFrog.Assembler.MacroSystem;
 using Furesoft.PrattParser;
 using Furesoft.PrattParser.Lexing;
 
-namespace EatFrog.Assembler.Core.Matcher;
+namespace EatFrog.Assembler.Matcher;
 
 internal class MacroMatcher<TOpCode, TRegister, TMacroStorage>(MacroExpander<TOpCode, TRegister, TMacroStorage> expander) : IMatcher
     where TOpCode : struct
