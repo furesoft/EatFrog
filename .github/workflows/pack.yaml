@@ -1,0 +1,46 @@
+name: Build and Publish NuGet Package
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.x'
+
+      - name: Install dependencies
+        run: dotnet restore Src/EatFrog/EatFrog.csproj
+
+      - name: Build and package
+        run: |
+          dotnet build -c Release Src/EatFrog/EatFrog.csproj
+          dotnet pack -c Release -o ./nuget Src/EatFrog/EatFrog.csproj
+
+          dotnet build -c Release Src/Platforms/EatFrog.Platforms.Chip8/EatFrog.csproj
+          dotnet pack -c Release -o ./nuget Src/Platforms/EatFrog.Platforms.Chip8/EatFrog.csproj
+
+      - name: Publish to NuGet
+        uses: actions/upload-artifact@v4
+        with:
+          name: nuget-package
+          path: ./nuget/*.nupkg
+
+      - name: Publish package To GH
+        run: |
+          dotnet nuget push ./nuget/*.nupkg -s https://nuget.pkg.github.com/${GITHUB_OWNER}/index.json -k ${{ secrets.GITHUB_TOKEN }} --skip-duplicate
+        env:
+          GITHUB_OWNER: ${{ github.repository_owner }}
+
+      - name: Publish package To Nuget
+        run: |
+          dotnet nuget push ./nuget/*.nupkg --api-key "${{ secrets.NUGET_APIKEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate
