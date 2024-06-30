@@ -12,7 +12,7 @@ public class MacroExpander<TOpCode, TRegister, TMacroStorage>
 
     public Instruction<TOpCode>[] ExpandMacro(MacroNode invocation)
     {
-        var macroDef = Storage.Macros[invocation.Mnemnonic.Name] ?? throw new MacroNotFoundException(invocation.Mnemnonic.Name);
+        var macroDef = Storage.Macros[invocation.Mnemnonic] ?? throw new MacroNotFoundException(invocation.Mnemnonic);
 
         var args = ExtractArguments(invocation);
         var expandedInstructions = macroDef.Expand(args);

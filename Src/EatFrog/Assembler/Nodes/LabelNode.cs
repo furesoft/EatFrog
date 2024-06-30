@@ -1,8 +1,7 @@
-﻿using Furesoft.PrattParser.Nodes;
+﻿using Silverfly.Nodes;
 
 namespace EatFrog.Assembler.Core.Nodes;
 
-internal class LabelNode(string name) : AstNode
+internal record LabelNode(string Name) : AstNode
 {
-    public string Name { get; set; } = name;
 }

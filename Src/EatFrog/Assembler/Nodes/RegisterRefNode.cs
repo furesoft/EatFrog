@@ -1,9 +1,8 @@
-using Furesoft.PrattParser.Nodes;
+using Silverfly.Nodes;
 
 namespace EatFrog.Assembler.Nodes;
 
-public class RegisterRefNode<TRegister>(TRegister register) : AstNode
+public record RegisterRefNode<TRegister>(TRegister Register) : AstNode
     where TRegister : struct
 {
-    public TRegister Register { get; } = register;
 }

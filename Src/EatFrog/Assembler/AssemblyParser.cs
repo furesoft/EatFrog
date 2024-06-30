@@ -1,10 +1,10 @@
 ﻿using EatFrog.Assembler.Matcher;
 using EatFrog.Assembler.Parselets;
 using EatFrog.Assembler.MacroSystem;
-using Furesoft.PrattParser;
-using Furesoft.PrattParser.Lexing.IgnoreMatcher.Comments;
-using Furesoft.PrattParser.Parselets;
-using static Furesoft.PrattParser.PredefinedSymbols;
+using Silverfly;
+using Silverfly.Lexing.IgnoreMatcher.Comments;
+using Silverfly.Parselets;
+using static Silverfly.PredefinedSymbols;
 
 namespace EatFrog.Assembler.Core;
 
@@ -18,7 +18,7 @@ public class AssemblyParser<TOpCode, TRegister, TMacroStorage> : Parser
     protected override void InitParselets()
     {
         Block(SOF, EOF, EOL);
-        
+
         Register("#opcode", new InstructionParselet<TOpCode>());
         Register("#register", new RegisterParselet<TRegister>());
         Register("#macro", new MacroParselet<TOpCode, TRegister>());
@@ -29,7 +29,7 @@ public class AssemblyParser<TOpCode, TRegister, TMacroStorage> : Parser
         this.AddArithmeticOperators();
 
         Prefix("$");
-        
+
         Group("[", "]");
     }
 

@@ -1,6 +1,6 @@
 using System.Runtime.CompilerServices;
 using EatFrog.Platforms.Chip8;
-using Furesoft.PrattParser.Testing;
+using Silverfly.Testing;
 
 namespace TestProject;
 
@@ -9,7 +9,8 @@ public class ParsingTests : SnapshotParserTestBase
     readonly Chip8Maschine maschine = new();
 
     [ModuleInitializer]
-    public static void Initialize() {
+    public static void Initialize()
+    {
         Init();
     }
 
@@ -30,7 +31,8 @@ public class ParsingTests : SnapshotParserTestBase
     }
 
     [Test]
-    public Task CallRegister_Should_Pass() {
+    public Task CallRegister_Should_Pass()
+    {
         var tree = maschine.Parse("call ve");
 
         return Verify(tree, settings);

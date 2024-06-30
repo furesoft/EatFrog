@@ -2,9 +2,9 @@ using EatFrog.Assembler.Core.Nodes;
 using EatFrog.Assembler.MacroSystem;
 using EatFrog.Assembler.Nodes;
 using EatFrog.Operands;
-using Furesoft.PrattParser;
-using Furesoft.PrattParser.Nodes;
-using Furesoft.PrattParser.Nodes.Operators;
+using Silverfly;
+using Silverfly.Nodes;
+using Silverfly.Nodes.Operators;
 
 namespace EatFrog;
 
@@ -22,10 +22,12 @@ internal class InstructionConversionVisitor<TOpCode, TRegister, TMacroStorage>(M
         {
             foreach (var child in block.Children)
             {
-                if (child is InstructionNode<TOpCode> instr) {
+                if (child is InstructionNode<TOpCode> instr)
+                {
                     instructions.Add(VisitInstruction(instr));
                 }
-                else if (child is MacroNode macro) {
+                else if (child is MacroNode macro)
+                {
                     instructions.AddRange(expander.ExpandMacro(macro));
                 }
             }
@@ -54,7 +56,7 @@ internal class InstructionConversionVisitor<TOpCode, TRegister, TMacroStorage>(M
         return operand switch
         {
             RegisterRefNode<TRegister> regRef => new RegisterRef<TRegister>(regRef.Register),
-            LiteralNode<ulong> literal => new Value(literal.Value),
+            LiteralNode literal when literal.Value is ulong v => new Value(v),
             PrefixOperatorNode labelRef
                 when labelRef.Operator == PredefinedSymbols.Dollar && labelRef.Expr is NameNode name => new LabelRef(name.Name),
             _ => throw new InvalidOperationException($"Invalid Operand '{operand}'")

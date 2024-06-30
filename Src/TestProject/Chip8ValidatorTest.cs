@@ -2,7 +2,7 @@
 using EatFrog;
 using EatFrog.Operands;
 using EatFrog.Platforms.Chip8;
-using Furesoft.PrattParser.Testing;
+using Silverfly.Testing;
 
 namespace TestProject;
 

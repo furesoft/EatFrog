@@ -1,10 +1,9 @@
-using Furesoft.PrattParser;
-using Furesoft.PrattParser.Nodes;
+using System.Collections.Immutable;
+using Silverfly;
+using Silverfly.Nodes;
 
 namespace EatFrog.Assembler.Nodes;
 
-public class MacroNode(string mnemnonic, List<AstNode> arguments) : AstNode
+public record MacroNode(string Mnemnonic, ImmutableList<AstNode> Arguments) : AstNode
 {
-    public Symbol Mnemnonic { get; } = mnemnonic;
-    public List<AstNode> Arguments { get; } = arguments;
 }
