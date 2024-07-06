@@ -1,4 +1,6 @@
-namespace EatFrog.Assembler.Core.Matcher;
+using Silverfly.Lexing.Matcher;
+
+namespace EatFrog.Assembler.Matcher;
 
 internal class RegisterMatcher<T> : EnumMatcher<T>
     where T : struct

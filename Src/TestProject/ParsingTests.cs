@@ -1,38 +1,33 @@
 using System.Runtime.CompilerServices;
+using EatFrog.Assembler;
 using EatFrog.Platforms.Chip8;
-using Furesoft.PrattParser.Testing;
+using Silverfly.Testing;
 
 namespace TestProject;
 
-public class ParsingTests : SnapshotParserTestBase
+public class ParsingTests : SnapshotParserTestBase<AssemblyParser<Chip8Opcode, Chip8Register>>
 {
     readonly Chip8Maschine maschine = new();
 
     [ModuleInitializer]
     public static void Initialize() {
-        Init();
+        Init(new TestOptions(UseStatementsAtToplevel: true, Filename: "test.dsl"));
     }
 
     [Test]
     public Task Block_Multiple_Children_Should_Pass()
     {
-        var tree = maschine.Parse("call 42,5\ncls", "test.dsl");
-
-        return Verify(tree, settings);
+        return Test("call 42,5\ncls");
     }
 
     [Test]
     public Task Block_Single_Children_Should_Pass()
     {
-        var tree = maschine.Parse("call 42,5", "test.dsl");
-
-        return Verify(tree, settings);
+        return Test("call 42,5");
     }
 
     [Test]
     public Task CallRegister_Should_Pass() {
-        var tree = maschine.Parse("call ve");
-
-        return Verify(tree, settings);
+        return Test("call ve");
     }
 }

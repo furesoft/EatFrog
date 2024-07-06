@@ -1,9 +1,9 @@
 ﻿using EatFrog.Assembler.Nodes;
-using Furesoft.PrattParser;
-using Furesoft.PrattParser.Nodes;
-using Furesoft.PrattParser.Parselets;
+using Silverfly;
+using Silverfly.Nodes;
+using Silverfly.Parselets;
 
-namespace EatFrog.Assembler.Core.Parselets;
+namespace EatFrog.Assembler.Parselets;
 
 internal class InstructionParselet<TOpcode> : IPrefixParselet
     where TOpcode : struct

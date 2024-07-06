@@ -1,9 +1,9 @@
-﻿using EatFrog.Assembler.Core.Matcher;
-using EatFrog.Assembler.Core.Parselets;
-using Furesoft.PrattParser;
-using Furesoft.PrattParser.Parselets;
+﻿using EatFrog.Assembler.Matcher;
+using EatFrog.Assembler.Parselets;
+using Silverfly;
+using Silverfly.Parselets;
 
-namespace EatFrog.Assembler.Core;
+namespace EatFrog.Assembler;
 
 public class AssemblyParser<TOpcode, TRegister> : Parser
     where TOpcode : struct
@@ -21,7 +21,7 @@ public class AssemblyParser<TOpcode, TRegister> : Parser
         this.AddCommonLiterals();
         this.AddArithmeticOperators();
 
-        Prefix("$", 100);
+        Prefix("$", "Call");
         
         Group("[", "]");
     }
@@ -32,7 +32,7 @@ public class AssemblyParser<TOpcode, TRegister> : Parser
 
         lexer.AddMatcher(new OpcodeMatcher<TOpcode>());
         lexer.AddMatcher(new RegisterMatcher<TRegister>());
-        lexer.AddMatcher(new MacroMatcher([.. MacroExpander.Macros.Keys]));
+       // lexer.AddMatcher(new MacroMatcher([.. MacroExpander.Macros.Keys]));
 
         lexer.Ignore(' ');
     }

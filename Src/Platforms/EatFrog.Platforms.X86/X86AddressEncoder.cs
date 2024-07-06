@@ -1,7 +1,4 @@
 ﻿namespace EatFrog.Platforms.X86;
-
-using System;
-
 public class X86AddressEncoder : IAddressEncoder
 {
     public byte[] Encode(ulong address)

@@ -1,13 +1,12 @@
-using EatFrog.Assembler.Core.Nodes;
 using EatFrog.Assembler.Nodes;
 using EatFrog.Operands;
-using Furesoft.PrattParser;
-using Furesoft.PrattParser.Nodes;
-using Furesoft.PrattParser.Nodes.Operators;
+using Silverfly;
+using Silverfly.Nodes;
+using Silverfly.Nodes.Operators;
 
 namespace EatFrog;
 
-internal class InstructionConversionVisitor<TOpCode, TRegister> : IVisitor<IEnumerable<Instruction<TOpCode>>>
+internal class InstructionConversionVisitor<TOpCode, TRegister> : NodeVisitor<IEnumerable<Instruction<TOpCode>>>
     where TOpCode : struct
     where TRegister : struct
 {
@@ -46,7 +45,7 @@ internal class InstructionConversionVisitor<TOpCode, TRegister> : IVisitor<IEnum
         return operand switch
         {
             RegisterRefNode<TRegister> regRef => new RegisterRef<TRegister>(regRef.Register),
-            LiteralNode<ulong> literal => new Value(literal.Value),
+            LiteralNode {Value: ulong value} => new Value(value),
             PrefixOperatorNode labelRef
                 when labelRef.Operator == PredefinedSymbols.Dollar && labelRef.Expr is NameNode name => new LabelRef(name.Name),
             _ => throw new InvalidOperationException($"Invalid Operand '{operand}'")
